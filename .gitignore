@@ -1,4 +1,7 @@
+.idea
 *.class
+*.iml
+.springBeans
 
 # Package Files #
 *.jar
