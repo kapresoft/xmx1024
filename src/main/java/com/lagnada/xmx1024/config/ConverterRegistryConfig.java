@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import java.util.Set;
 
 @Configuration
-//@Profile("dev")
 public class ConverterRegistryConfig {
 
     @Resource(name = "conversionService")

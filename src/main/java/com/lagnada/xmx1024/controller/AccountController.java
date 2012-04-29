@@ -28,7 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(produces = {"application/json"})
+@RequestMapping(value = "/api")
 public class AccountController extends BaseController {
 
     @Autowired
@@ -38,16 +38,12 @@ public class AccountController extends BaseController {
 
     @RequestMapping(value = "/account/{accountId}", method = {GET, HEAD}, produces = {"application/json", "application/atom+xml"})
     @ResponseBody
-    @MyAnnotation
     public ResponseEntity<AccountRepresentation> getAccount(@PathVariable Long accountId) {
         Account account = accountService.getAccountById(accountId);
         AccountRepresentation accountRepresentation = conversionService.convert(account, AccountRepresentation.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-My-Header", "Value");
-
-        UriComponents uri = ServletUriComponentsBuilder.fromCurrentRequest().build();
-        accountRepresentation.setReference(uri.toUri());
         return new ResponseEntity<AccountRepresentation>(accountRepresentation, headers, OK);
     }
 

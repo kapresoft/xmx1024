@@ -2,7 +2,9 @@ package com.lagnada.xmx1024.representation;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.annotate.JsonTypeName;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateMidnight;
@@ -14,9 +16,15 @@ import java.util.Date;
 
 @JsonTypeName("account")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "id", "username", "email",
+        "firstName", "lastName", "fullName", "birthdate", "prettyBirthdate",
+        "deleted", "reference"
+})
 public class AccountRepresentation implements Serializable {
 
     private static final long serialVersionUID = -6214910323191581222L;
+    public static final String BIRTHDATE_FORMAT = "MM-dd-yyyy";
 
     @JsonProperty("reference")
     private URI reference;
@@ -45,7 +53,7 @@ public class AccountRepresentation implements Serializable {
     @Email
     private String email;
 
-    @JsonProperty("isDeleted")
+    @JsonProperty("deleted")
     private boolean deleted = false;
 
     @JsonProperty("birthdate")
@@ -87,6 +95,7 @@ public class AccountRepresentation implements Serializable {
         this.email = email;
     }
 
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String getPassword() {
         return password;
     }
@@ -133,7 +142,7 @@ public class AccountRepresentation implements Serializable {
 
     public String getPrettyBirthdate() {
         return birthdate != null ?
-                new DateMidnight(birthdate).toString("yyyy-MM-dd") :
+                new DateMidnight(birthdate).toString(BIRTHDATE_FORMAT) :
                 null;
     }
 

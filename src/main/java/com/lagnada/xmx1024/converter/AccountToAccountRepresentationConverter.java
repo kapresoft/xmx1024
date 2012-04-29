@@ -26,12 +26,13 @@ public class AccountToAccountRepresentationConverter implements Converter<Accoun
             birthdate = new DateMidnight(birthdate.getTime()).toDate();
         }
         representation.setBirthdate(birthdate);
-        representation.setPassword(account.getPassword());
+        representation.setPassword(null);
         representation.setDeleted(account.getDeleted() != null ? account.getDeleted() : Boolean.FALSE);
         // skip deletedByField
 
         URI reference = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/account/{id}")
+                .path("/api/account")
+                .path("/{id}")
                 .buildAndExpand(account.getId())
                 .toUri();
         representation.setReference(reference);

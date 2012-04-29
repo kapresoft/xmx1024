@@ -17,13 +17,16 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@RequestMapping(value = "/api",
+        consumes = "application/json",
+        produces = "application/json")
 public class AccountCollectionController extends BaseController {
 
     @Autowired
     private AccountService accountService;
 
     @ResponseBody
-    @RequestMapping(value = "/accounts", method = POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/accounts", method = POST)
     public ResponseEntity<AccountRepresentation> createAccount(@RequestBody @Valid AccountRepresentation accountRepresentation) {
         Account account = conversionService.convert(accountRepresentation, Account.class);
         accountService.createAccount(account);

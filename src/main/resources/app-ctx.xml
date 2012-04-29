@@ -11,6 +11,7 @@
 
 
     <context:component-scan base-package="com.lagnada.xmx1024.config" annotation-config="true"/>
+    <context:property-placeholder location="classpath:application.properties"/>
 
     <cache:annotation-driven/>
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
@@ -20,6 +21,4 @@
             </set>
         </property>
     </bean>
-
-    <import resource="jpa-ctx.xml"/>
 </beans>

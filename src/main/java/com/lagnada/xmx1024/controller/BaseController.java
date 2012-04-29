@@ -4,6 +4,7 @@ import com.lagnada.xmx1024.representation.ErrorMessageRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,17 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.persistence.NoResultException;
-
 @RequestMapping(produces = {"application/json", "application/xml"})
 public class BaseController {
 
     @Autowired
     protected ConversionService conversionService;
 
-    @ExceptionHandler(NoResultException.class)
+    @ExceptionHandler(EmptyResultDataAccessException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void handleNoResultException(NoResultException exception) { /* no op */ }
+    @ResponseBody
+    public ErrorMessageRepresentation handleNoResultException(EmptyResultDataAccessException e) {
+        return conversionService.convert(e, ErrorMessageRepresentation.class);
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
