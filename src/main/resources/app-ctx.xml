@@ -5,25 +5,36 @@
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="
-    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
     	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+
 	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="com.lagnada.xmx1024.service,com.lagnada.xmx1024.dao,com.lagnada.xmx1024.converter"/>
-    <context:property-placeholder location="classpath*:application.properties"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
     <cache:annotation-driven/>
 
     <bean class="com.lagnada.xmx1024.config.AppContextConfig"/>
 
+    <!--<context:property-placeholder location="classpath*:*.properties"/>-->
+    <!--<context:property-placeholder location="classpath*:encryptor.properties"/>-->
+    <bean id="propertyPlaceholder" class="org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer"
+          p:locations="classpath*:*.properties">
+        <constructor-arg>
+            <!-- TODO: Create configurer and source the encryptor.properties file for BasicTextEncryptor.password -->
+            <bean class="org.jasypt.util.text.BasicTextEncryptor" p:password="go-big-or-go-home"/>
+        </constructor-arg>
+    </bean>
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basenames="classpath:ValidationMessages"
           p:defaultEncoding="UTF-8"/>
-
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+          p:protocol="smtps" p:defaultEncoding="UTF-8"
+          p:host="${mail.smtps.host}" p:port="${mail.smtps.port}"
+          p:username="${mail.smtps.username}" p:password="${mail.smtps.password}"/>
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
             <set>

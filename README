@@ -14,3 +14,6 @@ Run Tomcat
 ~> mvn tomcat:run
 or
 ~> mvn tomcat:run -DskipTests=true
+
+Point your browser to the following URL:
+    http://localhost:8080/xmx1024/
