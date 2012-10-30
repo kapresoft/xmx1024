@@ -4,16 +4,26 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
     	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+    	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <context:component-scan base-package="com.lagnada.xmx1024.config" annotation-config="true"/>
-    <context:property-placeholder location="classpath:application.properties"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.lagnada.xmx1024.service,com.lagnada.xmx1024.dao,com.lagnada.xmx1024.converter"/>
+    <context:property-placeholder location="classpath*:application.properties"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <cache:annotation-driven/>
+
+    <bean class="com.lagnada.xmx1024.config.AppContextConfig"/>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basenames="classpath:ValidationMessages"
+          p:defaultEncoding="UTF-8"/>
+
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
             <set>

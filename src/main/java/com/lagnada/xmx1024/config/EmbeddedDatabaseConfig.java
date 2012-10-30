@@ -7,7 +7,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
-//@Profile("embedded")
 @PropertySource("classpath:jpa-h2.properties")
 public class EmbeddedDatabaseConfig {
 

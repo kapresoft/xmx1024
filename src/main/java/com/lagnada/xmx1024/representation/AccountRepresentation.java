@@ -1,5 +1,6 @@
 package com.lagnada.xmx1024.representation;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
@@ -21,6 +22,7 @@ import java.util.Date;
         "firstName", "lastName", "fullName", "birthdate", "prettyBirthdate",
         "deleted", "reference"
 })
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
 public class AccountRepresentation implements Serializable {
 
     private static final long serialVersionUID = -6214910323191581222L;
@@ -49,7 +51,7 @@ public class AccountRepresentation implements Serializable {
     private String lastName;
 
     @JsonProperty("email")
-    @NotEmpty
+    @NotEmpty(message = "{invalid.email}")
     @Email
     private String email;
 

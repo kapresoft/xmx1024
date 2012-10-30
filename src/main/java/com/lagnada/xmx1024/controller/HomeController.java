@@ -21,7 +21,7 @@ public class HomeController {
     @Value("${application.version}")
     private String applicationVersion;
 
-    @RequestMapping(value = "/index", method = GET)
+    @RequestMapping(value = "/home", method = GET)
     public String home(Locale locale, Model model) {
         logger.info("Welcome home! the client locale is " + locale.toString());
         Date date = new Date();
