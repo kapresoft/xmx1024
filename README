@@ -2,3 +2,15 @@ xmx1024
 =======
 
 Sample Codes for my blog site http://xmx1024.blogspot.com/
+
+-----------------------------------------------------------------
+~> mvn clean package
+
+Run Jetty
+~> mvn jetty:run
+~> mvn jetty :run -DskipTests=true
+
+Run Tomcat
+~> mvn tomcat:run
+or
+~> mvn tomcat:run -DskipTests=true
