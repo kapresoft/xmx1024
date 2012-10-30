@@ -1,6 +1,5 @@
 package com.lagnada.xmx1024.representation;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
@@ -8,12 +7,11 @@ import org.codehaus.jackson.annotate.JsonTypeName;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.DateMidnight;
+import org.joda.time.LocalDate;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.net.URI;
-import java.util.Date;
 
 @JsonTypeName("account")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -22,11 +20,11 @@ import java.util.Date;
         "firstName", "lastName", "fullName", "birthdate", "prettyBirthdate",
         "deleted", "reference"
 })
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
 public class AccountRepresentation implements Serializable {
 
     private static final long serialVersionUID = -6214910323191581222L;
-    public static final String BIRTHDATE_FORMAT = "MM-dd-yyyy";
+    public static final String BIRTHDATE_FORMAT = "yyyy-MM-dd";
 
     @JsonProperty("reference")
     private URI reference;
@@ -59,7 +57,7 @@ public class AccountRepresentation implements Serializable {
     private boolean deleted = false;
 
     @JsonProperty("birthdate")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     public AccountRepresentation() {
         super();
@@ -134,17 +132,17 @@ public class AccountRepresentation implements Serializable {
         this.deleted = deleted;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
     public String getPrettyBirthdate() {
         return birthdate != null ?
-                new DateMidnight(birthdate).toString(BIRTHDATE_FORMAT) :
+                birthdate.toString(BIRTHDATE_FORMAT) :
                 null;
     }
 

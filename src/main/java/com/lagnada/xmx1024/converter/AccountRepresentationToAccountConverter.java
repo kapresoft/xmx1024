@@ -2,6 +2,7 @@ package com.lagnada.xmx1024.converter;
 
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
@@ -23,7 +24,8 @@ public class AccountRepresentationToAccountConverter implements Converter<Accoun
             account.setEmail(representation.getEmail());
             account.setFirstName(representation.getFirstName());
             account.setLastName(representation.getLastName());
-            account.setBirthdate(representation.getBirthdate());
+            LocalDate birthdate = representation.getBirthdate();
+            account.setBirthdate(birthdate != null ? birthdate.toDate() : null);
             account.setPassword(representation.getPassword());
             account.setDeleted(representation.isDeleted());
             account.setDeletedBy(null);
