@@ -17,3 +17,19 @@ or
 
 Point your browser to the following URL:
     http://localhost:8080/xmx1024/
+
+-----------------------------------------------------------------
+Compile Metadata
+
+If you're running this within an IDE, the metadata files need to be generated.
+You should execute a compile first to generate these files.
+
+~> mvn compile
+
+You will then see metadata java source files used by JPA for type-safe queries
+under this folder:
+    target/generated-sources/apt
+-----------------------------------------------------------------
+Miscellaneous Notes
+
+The database runs in-memory so it will be cleared each time you run jetty or tomcat.

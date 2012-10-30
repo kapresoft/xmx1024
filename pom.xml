@@ -12,7 +12,6 @@
         <java-version>1.6</java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-
         <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
         <maven-jetty-plugin-version>6.1.26</maven-jetty-plugin-version>
         <maven-processor-plugin-version>2.0.0</maven-processor-plugin-version>
@@ -20,6 +19,7 @@
         <tomcat-maven-plugin-version>1.1</tomcat-maven-plugin-version>
 
         <aspectj-version>1.6.9</aspectj-version>
+        <cglib-version>2.2.2</cglib-version>
         <h2database-version>1.3.160</h2database-version>
         <hibernate-annotations-version>4.0.0.Final</hibernate-annotations-version>
         <hibernate-entitymanager-version>4.0.0.Final</hibernate-entitymanager-version>
@@ -29,16 +29,17 @@
         <jackson-version>1.8.5</jackson-version>
         <jasypt-version>1.9.0</jasypt-version>
         <joda-time-version>2.1</joda-time-version>
+        <mail-version>1.4.5</mail-version>
         <slf4j-version>1.5.10</slf4j-version>
         <spring-security-version>3.1.0.RELEASE</spring-security-version>
         <spring-version>3.1.1.RELEASE</spring-version>
 
-        <cglib-version>2.2.2</cglib-version>
         <servlet-api-version>2.5</servlet-api-version>
         <jsp-api-version>2.1</jsp-api-version>
         <jstl-version>1.2</jstl-version>
+
+        <fest-assert.version>1.4</fest-assert.version>
         <junit-version>4.10</junit-version>
-        <mail-version>1.4.5</mail-version>
     </properties>
 
     <dependencies>
@@ -236,6 +237,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+            <version>${fest-assert.version}</version>
             <scope>test</scope>
         </dependency>
 

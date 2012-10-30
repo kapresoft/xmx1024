@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
@@ -20,13 +21,9 @@
 
     <!--<context:property-placeholder location="classpath*:*.properties"/>-->
     <!--<context:property-placeholder location="classpath*:encryptor.properties"/>-->
+    <bean id="textEncryptor" class="org.jasypt.util.text.BasicTextEncryptor" p:password="go-big-or-go-home"/>
     <bean id="propertyPlaceholder" class="org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer"
-          p:locations="classpath*:*.properties">
-        <constructor-arg>
-            <!-- TODO: Create configurer and source the encryptor.properties file for BasicTextEncryptor.password -->
-            <bean class="org.jasypt.util.text.BasicTextEncryptor" p:password="go-big-or-go-home"/>
-        </constructor-arg>
-    </bean>
+          p:locations="classpath*:*.properties" c:textEncryptor-ref="textEncryptor"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basenames="classpath:ValidationMessages"

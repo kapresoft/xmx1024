@@ -1,4 +1,4 @@
-package com.lagnada.xmx1024;
+package com.lagnada.xmx1024.integration;
 
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
