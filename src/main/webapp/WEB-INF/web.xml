@@ -4,43 +4,52 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-    <context-param>
+    <!--<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:app-ctx.xml</param-value>
+    </context-param>-->
+
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.lagnada.xmx1024.config.RootContextConfig</param-value>
     </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <filter>
-        <filter-name>etagFilter</filter-name>
-        <filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
-    </filter>
+    <!--<filter>-->
+    <!--<filter-name>etagFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>-->
+    <!--</filter>-->
 
     <!-- Processes application requests -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/servlet-context.xml</param-value>
-        </init-param>
+        <servlet-class>org.springframework.data.rest.webmvc.RepositoryRestExporterServlet</servlet-class>
+        <!--<init-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>/WEB-INF/spring/servlet-context.xml</param-value>-->
+        <!--</init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <filter-mapping>
-        <filter-name>etagFilter</filter-name>
-        <servlet-name>appServlet</servlet-name>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+    <!--<filter-name>etagFilter</filter-name>-->
+    <!--<servlet-name>appServlet</servlet-name>-->
+    <!--</filter-mapping>-->
 
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
-        <url-pattern>*.htm</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>appServlet</servlet-name>-->
+    <!--<url-pattern>*.htm</url-pattern>-->
+    <!--</servlet-mapping>-->
 
 </web-app>

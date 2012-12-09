@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private AccountDao accountDao;
+    protected AccountDao accountDao;
 
     @Override
     @Transactional(readOnly = true)

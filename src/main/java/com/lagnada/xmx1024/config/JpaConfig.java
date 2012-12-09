@@ -1,29 +1,40 @@
 package com.lagnada.xmx1024.config;
 
+import com.lagnada.xmx1024.domain.Account;
+import com.lagnada.xmx1024.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
+import org.springframework.orm.jpa.JpaDialect;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Profile("embedded")
 @Configuration
-@ImportResource("classpath:tx-config.xml")
 public class JpaConfig {
 
     private static final String PERSISTENCE_UNIT_NAME = "jpa";
-    private static final String PACKAGES_TO_SCAN = "com.lagnada.xmx1024";
+    private static final String[] PACKAGES_TO_SCAN = {
+            "com.lagnada.xmx1024",
+            AccountRepository.class.getPackage().getName(),
+            Account.class.getPackage().getName()
+    };
+
+    @Bean
+    public JpaDialect jpaDialect() {
+        return new HibernateJpaDialect();
+    }
 
     @Bean(name = "jpaAdapter")
     public HibernateJpaVendorAdapter hibernateJpaVendorAdapter(
@@ -53,7 +64,7 @@ public class JpaConfig {
     }
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(
+    public EntityManagerFactory localContainerEntityManagerFactoryBean(
             DataSource dataSource, LoadTimeWeaver loadTimeWeaver, JpaVendorAdapter jpaAdapter,
             @Qualifier("jpaProperties") Properties jpaProperties) {
 
@@ -65,7 +76,7 @@ public class JpaConfig {
         factory.setJpaVendorAdapter(jpaAdapter);
         factory.setJpaProperties(jpaProperties);
         factory.afterPropertiesSet();
-        return factory;
+        return factory.getObject();
     }
 
     @Bean

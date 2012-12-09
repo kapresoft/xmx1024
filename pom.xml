@@ -21,16 +21,16 @@
         <aspectj-version>1.6.9</aspectj-version>
         <cglib-version>2.2.2</cglib-version>
         <h2database-version>1.3.160</h2database-version>
-        <hibernate-annotations-version>4.0.0.Final</hibernate-annotations-version>
-        <hibernate-entitymanager-version>4.0.0.Final</hibernate-entitymanager-version>
+        <hibernate-annotations-version>4.1.6.Final</hibernate-annotations-version>
+        <hibernate-entitymanager-version>4.1.6.Final</hibernate-entitymanager-version>
         <hibernate-jpamodelgen-version>1.1.1.Final</hibernate-jpamodelgen-version>
         <hibernate-validator-version>4.1.0.Final</hibernate-validator-version>
         <javassist-version>3.7.ga</javassist-version>
-        <jackson-version>1.8.5</jackson-version>
+        <jackson-version>1.9.10</jackson-version>
         <jasypt-version>1.9.0</jasypt-version>
         <joda-time-version>2.1</joda-time-version>
         <mail-version>1.4.5</mail-version>
-        <slf4j-version>1.5.10</slf4j-version>
+        <slf4j-version>1.6.6</slf4j-version>
         <spring-security-version>3.1.0.RELEASE</spring-security-version>
         <spring-version>3.1.1.RELEASE</spring-version>
 
@@ -40,6 +40,10 @@
 
         <fest-assert.version>1.4</fest-assert.version>
         <junit-version>4.10</junit-version>
+        <spring-data-commons-core.version>1.4.0.RELEASE</spring-data-commons-core.version>
+        <spring-data-jpa.version>1.2.0.RELEASE</spring-data-jpa.version>
+        <spring-data-rest-webmvc.version>1.0.0.RELEASE</spring-data-rest-webmvc.version>
+        <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
     </properties>
 
     <dependencies>
@@ -143,13 +147,56 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator-version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate-jpamodelgen-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>${hibernate-jpa-2.0-api.version}</version>
+        </dependency>
 
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons-core</artifactId>
+            <version>${spring-data-commons-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-webmvc</artifactId>
+            <version>${spring-data-rest-webmvc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- AspectJ -->
         <dependency>
@@ -175,12 +222,12 @@
             <version>${slf4j-version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j-version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -269,11 +316,23 @@
 
     </dependencies>
     <repositories>
+        <!-- For testing against latest Spring Releases -->
+        <repository>
+            <id>spring-release</id>
+            <name>Spring Maven Release Repository</name>
+            <url>http://repo.springsource.org/libs-release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <!-- For testing against latest Spring snapshots -->
         <repository>
-            <id>springsource-snapshot</id>
+            <id>spring-snapshot</id>
             <name>Spring Maven Snapshot Repository</name>
-            <url>http://maven.springframework.org/snapshot</url>
+            <url>http://repo.springsource.org/libs-snapshot</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -283,9 +342,9 @@
         </repository>
         <!-- For developing against latest Spring milestones -->
         <repository>
-            <id>springsource-milestone</id>
+            <id>spring-milestone</id>
             <name>Spring Maven Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
+            <url>http://repo.springsource.org/libs-milestone</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

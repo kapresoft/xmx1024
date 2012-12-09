@@ -13,7 +13,8 @@
 	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.lagnada.xmx1024.service,com.lagnada.xmx1024.dao,com.lagnada.xmx1024.converter"/>
+    <context:component-scan
+            base-package="com.lagnada.xmx1024.service,com.lagnada.xmx1024.dao,com.lagnada.xmx1024.converter,com.lagnada.xmx1024.repository"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <cache:annotation-driven/>
 
@@ -22,7 +23,8 @@
     <!--<context:property-placeholder location="classpath*:*.properties"/>-->
     <!--<context:property-placeholder location="classpath*:encryptor.properties"/>-->
     <bean id="textEncryptor" class="org.jasypt.util.text.BasicTextEncryptor" p:password="go-big-or-go-home"/>
-    <bean id="propertyPlaceholder" class="org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer"
+    <bean id="propertyPlaceholder"
+          class="org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer"
           p:locations="classpath*:*.properties" c:textEncryptor-ref="textEncryptor"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
