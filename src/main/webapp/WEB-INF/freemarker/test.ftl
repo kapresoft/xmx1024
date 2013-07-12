@@ -4,7 +4,7 @@
 
 <@locale>
 <h3>Current Locale</h3>
-<div style="margin-left: 20px;">${currentLocale.toString()} ${currentLocale.displayName}</div>
+<div style="margin-left: 20px;">${requestLocale.toString()} ${requestLocale.displayName}</div>
 
 <h3>Available Locales:</h3>
 <div style="margin-left: 20px;">
