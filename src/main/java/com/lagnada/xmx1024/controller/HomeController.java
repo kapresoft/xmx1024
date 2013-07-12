@@ -32,4 +32,9 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/test", method = GET)
+    public String test() {
+        return "test";
+    }
+
 }
