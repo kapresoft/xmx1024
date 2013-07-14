@@ -38,12 +38,20 @@
 <h3>Quick Select</h3>
 
 <div class="btn-group" style="margin-bottom: 20px;">
-    <button id="us" data-locale="en_US" class="locale-button btn btn-primary wide">United States</button>
-    <button id="finland" data-locale="fi_FI" class="locale-button btn wide">Finland</button>
-    <button id="sweden" data-locale="sv_SE" class="locale-button btn wide">Sweden</button>
-    <button id="sweden" data-locale="zh_CN" class="locale-button btn wide">China</button>
-    <button id="sweden" data-locale="ko_KO" class="locale-button btn wide">Korea</button>
-    <button id="sweden" data-locale="ru_RU" class="locale-button btn wide">Russia</button>
+    <button data-locale="en_US" class="locale-button btn btn-primary wide">United States</button>
+    <button data-locale="fi_FI" class="locale-button btn wide">Finland</button>
+    <div class="btn-group">
+        <button data-locale="sv_SE" class="locale-button btn wide">Sweden</button>
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a data-locale="zh_CN" class="locale-button" href="#">China</a></li>
+            <li><a data-locale="ko_KO" class="locale-button" href="#">Korea</a></li>
+            <li><a data-locale="ru_RU" class="locale-button" href="#">Russia</a></li>
+            <li><a data-locale="vi_VN" class="locale-button" href="#">Vietnam</a></li>
+        </ul>
+    </div>
 </div>
 
 <h2>Available Locales:</h2>
@@ -74,7 +82,7 @@
                 window.location = '?locale=' + $(this).data('locale');
             });
         };
-        $('button[class~="locale-button"]').each(function () {
+        $('[class~="locale-button"]').each(function () {
             attachButtonListener($(this));
         });
     });
