@@ -38,9 +38,12 @@
 <h3>Quick Select</h3>
 
 <div class="btn-group" style="margin-bottom: 20px;">
-    <button id="us" data-locale="en_US" class="btn btn-primary wide">United States</button>
-    <button id="finland" data-locale="fi_FI" class="btn wide">Finland</button>
-    <button id="sweden" data-locale="sv_SE" class="btn wide">Sweden</button>
+    <button id="us" data-locale="en_US" class="locale-button btn btn-primary wide">United States</button>
+    <button id="finland" data-locale="fi_FI" class="locale-button btn wide">Finland</button>
+    <button id="sweden" data-locale="sv_SE" class="locale-button btn wide">Sweden</button>
+    <button id="sweden" data-locale="zh_CN" class="locale-button btn wide">China</button>
+    <button id="sweden" data-locale="ko_KO" class="locale-button btn wide">Korea</button>
+    <button id="sweden" data-locale="ru_RU" class="locale-button btn wide">Russia</button>
 </div>
 
 <h2>Available Locales:</h2>
@@ -66,14 +69,14 @@
 
 <script>
     $(document).ready(function () {
-        attachButtonListener = function (elId) {
-            $(elId).click(function () {
+        attachButtonListener = function (localeEl) {
+            $(localeEl).click(function () {
                 window.location = '?locale=' + $(this).data('locale');
             });
         };
-        attachButtonListener('#us');
-        attachButtonListener('#finland');
-        attachButtonListener('#sweden');
+        $('button[class~="locale-button"]').each(function () {
+            attachButtonListener($(this));
+        });
     });
 </script>
 
