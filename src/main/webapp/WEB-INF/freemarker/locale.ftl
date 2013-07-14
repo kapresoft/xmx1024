@@ -69,9 +69,6 @@
             <div class="span4 text-success">${locale.localeDisplayName}</div>
         </div>
     </#list>
-<#--<#list availableLocales as locale>-->
-<#--<a href="?locale=${locale.localeText}">${locale.localeText}</a> = ${locale.localeDisplayName} [${locale.displayName}]</br>-->
-<#--</#list>-->
 </div>
 </@locale>
 
