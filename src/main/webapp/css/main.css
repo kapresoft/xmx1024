@@ -1,0 +1,53 @@
+/*font-family: 'Questrial', sans-serif;*/
+/*font-family: 'Acme', sans-serif;*/
+/*font-family: 'Archivo Black', sans-serif;*/
+/*font-family: 'Berkshire Swash', cursive;*/
+/*font-family: 'Ruda', sans-serif;*/
+/*font-family: 'Righteous', cursive;*/
+/*font-family: 'Montserrat', sans-serif;*/
+/*font-family: 'Fjalla One', sans-serif;*/
+
+html, body, .body-wrap {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom right, #48715d, #6a942f);
+    margin: 0 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo Black', sans-serif;
+}
+
+input[placeholder], [placeholder], *[placeholder] {
+}
+
+.body-wrap {
+    padding-top: 5px;
+    background-color: #ffffff;
+}
+
+.hero-unit {
+    padding: 5px 20px;
+    margin-bottom: 10px;
+}
+
+fieldset.white .control-label {
+    color: #ffffff;
+}
+
+/* for error labels */
+input[type=text] {
+    margin-bottom: 0;
+}
+
+.label-right {
+    float: right;
+}
+
+form {
+
+}

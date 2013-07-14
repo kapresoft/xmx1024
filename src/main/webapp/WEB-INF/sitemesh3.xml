@@ -1,0 +1,5 @@
+<sitemesh>
+    <mapping path="/*" decorator="/decorators/sticky-footer-and-menu.jsp"/>
+    <mapping path="/css/*" exclude="true"/>
+    <mapping path="/bootstrap/*" exclude="true"/>
+</sitemesh>
