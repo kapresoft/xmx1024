@@ -12,14 +12,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <%--<link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">--%>
+    <%--<link href="${ctx}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">--%>
+
+    <link href="${ctx}/bootstrap/less/bootstrap.less" rel="stylesheet/less" media="all"/>
+    <link href="${ctx}/css/main.less" rel="stylesheet/less" media="all">
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One,Archivo+Black|Telex|Questrial|Acme|Archivo+Black|Berkshire+Swash|Ruda|Righteous|Montserrat'
           rel='stylesheet' type='text/css'>
 
-    <link href="${ctx}/css/main.css" rel="stylesheet" media="screen">
-
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="${ctx}/bootstrap/js/jquery.js"></script>
+    <script src="${ctx}/bootstrap/js/less.min.js"></script>
     <script src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
 
     <sitemesh:write property='head'/>

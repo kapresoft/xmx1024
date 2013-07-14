@@ -39,7 +39,7 @@
 
 <div class="btn-group" style="margin-bottom: 20px;">
     <button data-locale="en_US" class="locale-button btn btn-primary wide">United States</button>
-    <button data-locale="fi_FI" class="locale-button btn wide">Finland</button>
+    <button data-locale="fi_FI" class="locale-button btn wide" style="margin-right: 10px;">Finland</button>
     <div class="btn-group">
         <button data-locale="sv_SE" class="locale-button btn wide">Sweden</button>
         <button class="btn dropdown-toggle" data-toggle="dropdown">

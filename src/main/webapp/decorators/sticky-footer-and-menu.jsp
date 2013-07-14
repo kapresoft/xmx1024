@@ -13,24 +13,34 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="${ctx}/bootstrap/css/bootstrap.css" rel="stylesheet">
-
     <%-- HTML5 Fonts --%>
     <%-- https://developers.google.com/fonts/docs/getting_started#Effects --%>
-    <link href='http://fonts.googleapis.com/css?effect=shadow-multiple|stonewash|destruction|emboss|3d|3d-float|wallpaper&family=Fjalla+One,Archivo+Black|Telex|Questrial|Acme|Archivo+Black|Berkshire+Swash|Ruda|Righteous|Montserrat|Brawler|EB+Garamond'
-          rel='stylesheet' type='text/css'>
-    <link href="${ctx}/css/sticky-footer-and-menu.css" rel="stylesheet">
+    <%--<link href='http://fonts.googleapis.com/css?effect=shadow-multiple|stonewash|destruction|emboss|3d|3d-float|wallpaper&family=BenchNine|Fjalla+One,Archivo+Black|Telex|Questrial|Acme|Archivo+Black|Berkshire+Swash|Ruda|Righteous|Montserrat|Brawler|EB+Garamond|Chau+Philomene+One|UnifrakturCook:700|Special+Elite|Mouse+Memoirs|Aclonica' rel='stylesheet' type='text/css'/>--%>
+    <link href='http://fonts.googleapis.com/css?effectx=wallpaper&family=BenchNine|Aclonica|Ruda' rel='stylesheet'
+          type='text/css'/>
 
-    <link href="${ctx}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="${ctx}/bootstrap/less/bootstrap.less" rel="stylesheet/less" media="all"/>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="${ctx}/bootstrap/js/html5shiv.js"></script>
     <![endif]-->
 
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="${ctx}/bootstrap/js/jquery.js"></script>
-    <script src="${ctx}/bootstrap/js/bootstrap.js"></script>
+    <script src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        less = {
+            env: "production", // development or production
+            async: false,       // load imports async
+            fileAsync: false,   // load imports async when in a page under a file protocol
+            poll: 1000,         // when in watch mode, time in ms between polls
+            functions: {},      // user functions, keyed by name
+            dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+            relativeUrls: false // whether to adjust url's to be relative if false, url's are already relative to the entry less file
+        };
+    </script>
+    <script src="${ctx}/bootstrap/js/less.min.js"></script>
 
     <sitemesh:write property='head'/>
 </head>
@@ -51,7 +61,7 @@
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li id="homeMenu" class="active"><a href="${ctx}/home"><i class="icon-bookmark"></i> Home</a>
+                        <li id="homeMenu"><a href="${ctx}/home"><i class="icon-bookmark"></i> Home</a>
                         </li>
                         <li id="localeMenu" class="font-effect-embos"><a href="${ctx}/locale">Locale</a></li>
                         <li class="dropdown">
