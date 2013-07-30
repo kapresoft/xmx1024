@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE jasperReport PUBLIC
+        "//JasperReports//DTD Report Design//EN"
+        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="FirstJasper" columnSpacing="15"
+              leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+    <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false"
+           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252"
+           isPdfEmbedded="false"/>
+    <style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="8" isBold="true" isItalic="false"
+           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252"
+           isPdfEmbedded="false"/>
+    <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="8" isBold="false" isItalic="true"
+           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252"
+           isPdfEmbedded="false"/>
+
+    <parameter name="ReportTitle" class="java.lang.String"/>
+    <parameter name="Logo" class="java.lang.String"/>
+
+    <field name="CUSTOMER_ID" class="java.lang.Long">
+        <fieldDescription>id</fieldDescription>
+    </field>
+    <field name="FIRST_NAME" class="java.lang.String">
+        <fieldDescription>firstName</fieldDescription>
+    </field>
+    <field name="LAST_NAME" class="java.lang.String">
+        <fieldDescription>lastName</fieldDescription>
+    </field>
+    <field name="PHONE" class="java.lang.String">
+        <fieldDescription>phone</fieldDescription>
+    </field>
+
+    <title>
+        <band height="100">
+            <elementGroup>
+                <line>
+                    <reportElement x="0" y="0" width="555" height="1"/>
+                    <graphicElement/>
+                </line>
+                <image scaleImage="Clip">
+                    <reportElement x="0" y="5" width="165" height="40"/>
+                    <graphicElement/>
+                    <imageExpression class="java.lang.String"><![CDATA[$P{Logo}]]></imageExpression>
+                </image>
+            </elementGroup>
+            <textField isBlankWhenNull="true">
+                <reportElement x="180" y="5" width="375" height="35"/>
+                <textElement textAlignment="Right">
+                    <font size="22"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="180" y="40" width="375" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="12"/>
+                </textElement>
+                <text><![CDATA[(c)2001-2006 by Tyrion Lannister]]></text>
+            </staticText>
+            <!--<textField evaluationTime="Report">-->
+            <!--<reportElement x="255" y="55" width="100" height="40"/>-->
+            <!--<textElement textAlignment="Justified"/>-->
+            <!--<textFieldExpression class="java.lang.String"><![CDATA["There are " + String.valueOf($V{REPORT_COUNT}) + " orders on this report, with a total freight of " + new DecimalFormat("0.00").format($V{FreightSumReport}.doubleValue())]]></textFieldExpression>-->
+            <!--</textField>-->
+        </band>
+    </title>
+
+    <pageHeader>
+
+        <!--<band height="30">-->
+        <!--<staticText>-->
+        <!--<reportElement x="0" y="0" width="70" height="24" />-->
+        <!--<text><![CDATA[Customer ID: ]]></text>-->
+        <!--</staticText>-->
+        <!--<staticText>-->
+        <!--<reportElement x="100" y="0" width="70" height="24"/>-->
+        <!--<text><![CDATA[First Name: ]]></text>-->
+        <!--</staticText>-->
+        <!--<staticText>-->
+        <!--<reportElement x="240" y="0" width="70" height="24"/>-->
+        <!--<text><![CDATA[Last Name: ]]></text>-->
+        <!--</staticText>-->
+        <!--<staticText>-->
+        <!--<reportElement x="420" y="0" width="70" height="24"/>-->
+        <!--<text><![CDATA[Phone: ]]></text>-->
+        <!--</staticText>-->
+        <!--</band>-->
+        <band height="45">
+            <rectangle>
+                <reportElement mode="Transparent" x="0" y="0" width="555" height="40"/>
+                <graphicElement/>
+            </rectangle>
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="25"/>
+                <textElement textAlignment="Center">
+                    <font size="18"/>
+                </textElement>
+                <text><![CDATA[Customer List]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="25" width="555" height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA["Message Here"]]></textFieldExpression>
+            </textField>
+        </band>
+
+    </pageHeader>
+
+    <columnHeader>
+        <band height="12">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="12" backcolor="#333333"/>
+                <graphicElement/>
+            </rectangle>
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="0" width="100" height="12" forecolor="#ffffff" backcolor="#333333"
+                               style="Arial_Bold"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Customer ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="100" y="0" width="140" height="12" forecolor="#ffffff"
+                               backcolor="#333333" style="Arial_Bold"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[First Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="240" y="0" width="180" height="12" forecolor="#ffffff"
+                               backcolor="#333333" style="Arial_Bold"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Last Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="420" y="0" width="135" height="12" forecolor="#ffffff"
+                               backcolor="#333333" style="Arial_Bold"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Phone]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+
+        <band height="15">
+            <rectangle>
+                <reportElement x="-1" y="4" width="1" height="1" forecolor="#ff0000" backcolor="#ff0000">
+                    <printWhenExpression>
+                        <![CDATA[new Boolean($F{CUSTOMER_ID}.intValue() % 10 == 0)]]></printWhenExpression>
+                </reportElement>
+                <graphicElement/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="0" width="100" height="15"/>
+                <textFieldExpression>
+                    <![CDATA[$F{CUSTOMER_ID}]]>
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="0" width="70" height="15"/>
+                <textFieldExpression>
+                    <![CDATA[$F{FIRST_NAME}]]>
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="240" y="0" width="135" height="15"/>
+                <textFieldExpression>
+                    <![CDATA[$F{LAST_NAME}]]>
+                </textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="420" y="0" width="150" height="15"/>
+                <textFieldExpression>
+                    <![CDATA[$F{PHONE}]]>
+                </textFieldExpression>
+            </textField>
+        </band>
+
+    </detail>
+
+</jasperReport>
