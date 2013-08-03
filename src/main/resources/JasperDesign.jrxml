@@ -1,184 +1,173 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE jasperReport PUBLIC
-        "//JasperReports//DTD Report Design//EN"
-        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="FirstJasper" columnSpacing="15"
-              leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30">
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="FirstJasper" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752"
+              leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30"
+              uuid="98ddb265-196f-4e42-ac80-d0a78f16a57a">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
     <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false"
            isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252"
            isPdfEmbedded="false"/>
-    <style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="8" isBold="true" isItalic="false"
-           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252"
-           isPdfEmbedded="false"/>
-    <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="8" isBold="false" isItalic="true"
-           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252"
-           isPdfEmbedded="false"/>
-
+    <style name="Arial_Bold" fontName="Arial" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+    <style name="Arial_Italic" fontName="Arial" fontSize="8" isBold="false" isItalic="true" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
     <parameter name="ReportTitle" class="java.lang.String"/>
     <parameter name="Logo" class="java.lang.String"/>
-
     <field name="CUSTOMER_ID" class="java.lang.Long">
-        <fieldDescription>id</fieldDescription>
+        <fieldDescription><![CDATA[id]]></fieldDescription>
     </field>
     <field name="FIRST_NAME" class="java.lang.String">
-        <fieldDescription>firstName</fieldDescription>
+        <fieldDescription><![CDATA[firstName]]></fieldDescription>
     </field>
     <field name="LAST_NAME" class="java.lang.String">
-        <fieldDescription>lastName</fieldDescription>
+        <fieldDescription><![CDATA[lastName]]></fieldDescription>
+    </field>
+    <field name="BALANCE" class="java.lang.Double">
+        <fieldDescription><![CDATA[balance]]></fieldDescription>
     </field>
     <field name="PHONE" class="java.lang.String">
-        <fieldDescription>phone</fieldDescription>
+        <fieldDescription><![CDATA[phone]]></fieldDescription>
     </field>
-
+    <field name="NOTES" class="java.lang.String">
+        <fieldDescription><![CDATA[notes]]></fieldDescription>
+    </field>
     <title>
-        <band height="100">
+        <band height="100" splitType="Stretch">
             <elementGroup>
                 <line>
-                    <reportElement x="0" y="0" width="555" height="1"/>
-                    <graphicElement/>
+                    <reportElement uuid="4e6dcb11-35b7-4458-a001-206aee1b5237" x="0" y="0" width="752" height="1"/>
                 </line>
                 <image scaleImage="Clip">
-                    <reportElement x="0" y="5" width="165" height="40"/>
-                    <graphicElement/>
-                    <imageExpression class="java.lang.String"><![CDATA[$P{Logo}]]></imageExpression>
+                    <reportElement uuid="9c7b325d-76ec-418f-bb15-3bfdfab4b732" x="0" y="1" width="165" height="40"/>
+                    <imageExpression><![CDATA[$P{Logo}]]></imageExpression>
                 </image>
             </elementGroup>
-            <textField isBlankWhenNull="true">
-                <reportElement x="180" y="5" width="375" height="35"/>
-                <textElement textAlignment="Right">
-                    <font size="22"/>
-                </textElement>
-                <textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
-            </textField>
             <staticText>
-                <reportElement x="180" y="40" width="375" height="15"/>
+                <reportElement uuid="8c203a10-8719-4125-b90f-dd91ba0e2f6e" x="377" y="35" width="375" height="15"/>
                 <textElement textAlignment="Right">
                     <font size="12"/>
                 </textElement>
                 <text><![CDATA[(c)2001-2006 by Tyrion Lannister]]></text>
             </staticText>
-            <!--<textField evaluationTime="Report">-->
-            <!--<reportElement x="255" y="55" width="100" height="40"/>-->
-            <!--<textElement textAlignment="Justified"/>-->
-            <!--<textFieldExpression class="java.lang.String"><![CDATA["There are " + String.valueOf($V{REPORT_COUNT}) + " orders on this report, with a total freight of " + new DecimalFormat("0.00").format($V{FreightSumReport}.doubleValue())]]></textFieldExpression>-->
-            <!--</textField>-->
+            <textField isBlankWhenNull="true">
+                <reportElement uuid="b8aa805b-6f6c-4892-b867-51b68278445d" x="377" y="1" width="375" height="35"/>
+                <textElement textAlignment="Right">
+                    <font size="22"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+            </textField>
         </band>
     </title>
-
     <pageHeader>
-
-        <!--<band height="30">-->
-        <!--<staticText>-->
-        <!--<reportElement x="0" y="0" width="70" height="24" />-->
-        <!--<text><![CDATA[Customer ID: ]]></text>-->
-        <!--</staticText>-->
-        <!--<staticText>-->
-        <!--<reportElement x="100" y="0" width="70" height="24"/>-->
-        <!--<text><![CDATA[First Name: ]]></text>-->
-        <!--</staticText>-->
-        <!--<staticText>-->
-        <!--<reportElement x="240" y="0" width="70" height="24"/>-->
-        <!--<text><![CDATA[Last Name: ]]></text>-->
-        <!--</staticText>-->
-        <!--<staticText>-->
-        <!--<reportElement x="420" y="0" width="70" height="24"/>-->
-        <!--<text><![CDATA[Phone: ]]></text>-->
-        <!--</staticText>-->
-        <!--</band>-->
-        <band height="45">
+        <band height="45" splitType="Stretch">
             <rectangle>
-                <reportElement mode="Transparent" x="0" y="0" width="555" height="40"/>
-                <graphicElement/>
+                <reportElement uuid="754c4d92-391f-4bfd-ad84-dbe446cf3541" mode="Transparent" x="0" y="0" width="752"
+                               height="40"/>
             </rectangle>
             <staticText>
-                <reportElement x="0" y="0" width="555" height="25"/>
+                <reportElement uuid="191a2cdd-e40a-4143-a5bb-7e7823a123b5" x="0" y="0" width="752" height="25"/>
                 <textElement textAlignment="Center">
                     <font size="18"/>
                 </textElement>
                 <text><![CDATA[Customer List]]></text>
             </staticText>
             <textField>
-                <reportElement x="0" y="25" width="555" height="15"/>
+                <reportElement uuid="e34e7fd8-c567-428e-8172-9ef96942ef14" x="0" y="25" width="752" height="15"/>
                 <textElement textAlignment="Center">
                     <font size="10"/>
                 </textElement>
-                <textFieldExpression class="java.lang.String"><![CDATA["Message Here"]]></textFieldExpression>
+                <textFieldExpression><![CDATA["Message Here"]]></textFieldExpression>
             </textField>
         </band>
-
     </pageHeader>
-
     <columnHeader>
-        <band height="12">
-            <rectangle>
-                <reportElement x="0" y="0" width="555" height="12" backcolor="#333333"/>
-                <graphicElement/>
-            </rectangle>
+        <band height="12" splitType="Stretch">
             <staticText>
-                <reportElement mode="Opaque" x="0" y="0" width="100" height="12" forecolor="#ffffff" backcolor="#333333"
-                               style="Arial_Bold"/>
+                <reportElement uuid="b41392fa-a5c9-4130-a3be-620c0d9677bf" style="Arial_Bold" mode="Opaque" x="0" y="0"
+                               width="100" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
                 <textElement textAlignment="Left"/>
                 <text><![CDATA[Customer ID]]></text>
             </staticText>
             <staticText>
-                <reportElement mode="Opaque" x="100" y="0" width="140" height="12" forecolor="#ffffff"
-                               backcolor="#333333" style="Arial_Bold"/>
+                <reportElement uuid="01b8a44c-247b-4f1f-abfa-0d12fe01a122" style="Arial_Bold" mode="Opaque" x="100"
+                               y="0" width="135" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
                 <textElement textAlignment="Left"/>
                 <text><![CDATA[First Name]]></text>
             </staticText>
             <staticText>
-                <reportElement mode="Opaque" x="240" y="0" width="180" height="12" forecolor="#ffffff"
-                               backcolor="#333333" style="Arial_Bold"/>
+                <reportElement uuid="aec39fb9-a51c-4cb9-b663-31fb1c44f17f" style="Arial_Bold" mode="Opaque" x="235"
+                               y="0" width="189" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
                 <textElement textAlignment="Left"/>
                 <text><![CDATA[Last Name]]></text>
             </staticText>
             <staticText>
-                <reportElement mode="Opaque" x="420" y="0" width="135" height="12" forecolor="#ffffff"
-                               backcolor="#333333" style="Arial_Bold"/>
+                <reportElement uuid="45bd9941-470a-4a28-af96-ab3591f86d66" style="Arial_Bold" mode="Opaque" x="424"
+                               y="0" width="76" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Balance]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="f43a69b5-f0cc-4b74-b25d-a5bea51402f0" style="Arial_Bold" mode="Opaque" x="500"
+                               y="0" width="83" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
                 <textElement textAlignment="Left"/>
                 <text><![CDATA[Phone]]></text>
             </staticText>
+            <staticText>
+                <reportElement uuid="6a03f3a4-bbde-47e1-a64d-62065d328df5" style="Arial_Bold" mode="Opaque" x="583"
+                               y="0" width="169" height="12" forecolor="#FFFFFF" backcolor="#333333"/>
+                <textElement textAlignment="Left"/>
+                <text><![CDATA[Notes]]></text>
+            </staticText>
         </band>
     </columnHeader>
-
     <detail>
-
-        <band height="15">
+        <band height="15" splitType="Stretch">
             <rectangle>
-                <reportElement x="-1" y="4" width="1" height="1" forecolor="#ff0000" backcolor="#ff0000">
+                <reportElement uuid="53daeddb-b5c3-402b-98a6-dc8117c22edb" x="-1" y="4" width="1" height="1"
+                               forecolor="#FF0000" backcolor="#FF0000">
                     <printWhenExpression>
                         <![CDATA[new Boolean($F{CUSTOMER_ID}.intValue() % 10 == 0)]]></printWhenExpression>
                 </reportElement>
-                <graphicElement/>
             </rectangle>
             <textField>
-                <reportElement x="0" y="0" width="100" height="15"/>
-                <textFieldExpression>
-                    <![CDATA[$F{CUSTOMER_ID}]]>
-                </textFieldExpression>
+                <reportElement uuid="33b0edad-7a82-47d2-b53a-ae7065f98be8" x="0" y="0" width="100" height="15"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{CUSTOMER_ID}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement uuid="f170fd07-624f-424d-b56a-bdf26c8cc371" x="100" y="0" width="135" height="15"/>
+                <textElement>
+                    <font fontName="Arial Unicode MS" isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{FIRST_NAME}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="100" y="0" width="70" height="15"/>
-                <textFieldExpression>
-                    <![CDATA[$F{FIRST_NAME}]]>
-                </textFieldExpression>
+                <reportElement uuid="3b4d016f-ed8e-4389-80a7-32dc0c0dbfaf" x="235" y="0" width="189" height="15"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{LAST_NAME}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement uuid="cf9cf53c-3616-4301-80c1-b21a3050aea2" stretchType="RelativeToBandHeight" x="583"
+                               y="0" width="169" height="15"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{NOTES}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true" pattern="€ #,##0.00" isBlankWhenNull="true">
+                <reportElement uuid="17993c1c-d071-46da-b810-63509302a60b" x="424" y="0" width="76" height="15"/>
+                <textElement>
+                    <font fontName="Arial Unicode MS" isPdfEmbedded="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{BALANCE}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="240" y="0" width="135" height="15"/>
-                <textFieldExpression>
-                    <![CDATA[$F{LAST_NAME}]]>
-                </textFieldExpression>
-            </textField>
-
-            <textField>
-                <reportElement x="420" y="0" width="150" height="15"/>
-                <textFieldExpression>
-                    <![CDATA[$F{PHONE}]]>
-                </textFieldExpression>
+                <reportElement uuid="0e3e53b3-5216-4856-8818-a67d4656a57e" x="500" y="0" width="83" height="15"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{PHONE}]]></textFieldExpression>
             </textField>
         </band>
-
     </detail>
-
 </jasperReport>

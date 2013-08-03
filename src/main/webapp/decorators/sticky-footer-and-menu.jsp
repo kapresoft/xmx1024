@@ -62,7 +62,7 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li id="homeMenu"><a href="${ctx}/home"><i class="icon-bookmark"></i> Home</a></li>
-                        <li id="jasperMenu"><a href="${ctx}/jasper"> Jasper</a></li>
+                        <li id="jasperReportsMenu"><a href="${ctx}/jasper"> Jasper Reports</a></li>
                         <li id="localeMenu" class="font-effect-embos"><a href="${ctx}/locale">Locale</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
@@ -110,18 +110,22 @@
         var homeMenuEl = $('#homeMenu');
         var activeMenuEl = $('meta[name=activeMenu]');
         var menuFound = false;
-        if (activeMenuEl.length > 0) {
+        if (activeMenuEl.length > 0)
+        {
             var activeMenu = activeMenuEl.attr('content');
             var activeMenuEl = $('#' + activeMenu);
-            if (activeMenuEl.length == 1) {
+            if (activeMenuEl.length == 1)
+            {
                 activeMenuEl.addClass('active');
                 menuFound = true;
             }
         }
 
-        if (menuFound) {
+        if (menuFound)
+        {
             homeMenuEl.removeClass('active');
-        } else {
+        } else
+        {
             homeMenuEl.addClass('active');
         }
     });
