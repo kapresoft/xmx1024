@@ -62,7 +62,7 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li id="homeMenu"><a href="${ctx}/home"><i class="icon-bookmark"></i> Home</a></li>
-                        <li id="jasperReportsMenu"><a href="${ctx}/jasper"> Jasper Reports</a></li>
+                        <li id="reportsMenu"><a href="${ctx}/reports"> Jasper Reports</a></li>
                         <li id="localeMenu" class="font-effect-embos"><a href="${ctx}/locale">Locale</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b

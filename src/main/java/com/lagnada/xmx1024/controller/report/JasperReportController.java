@@ -1,6 +1,7 @@
 package com.lagnada.xmx1024.controller.report;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -13,14 +14,18 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,27 +44,97 @@ public class JasperReportController
         pdf, xls
     }
 
-    @Value("classpath:JasperDesign.jrxml")
-    private Resource resource;
+    //@Value("classpath:JasperDesign.jrxml")
+    //private Resource resource;
 
-    @RequestMapping(value = "/jasper", method = GET)
+    @RequestMapping(value = "/reports", method = GET)
     public String handleJasper()
     {
-        return "jasper";
+        return "reports";
+    }
+
+    private JasperDesign loadJasperDesign(String designName)
+    {
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/jasper-designs/" + designName)
+                .build()
+                .toUri().toASCIIString();
+        InputStream inputStream = null;
+        JasperDesign jasperDesign = null;
+        Resource resource = null;
+        try
+        {
+            resource = new UrlResource(uri);
+            inputStream = resource.getInputStream();
+            jasperDesign = JRXmlLoader.load(resource.getInputStream());
+        }
+        catch (IOException e)
+        {
+            IOUtils.closeQuietly(inputStream);
+        }
+        catch (JRException e)
+        {
+            throw new IllegalStateException(e);
+        }
+        return jasperDesign;
+    }
+
+    private JasperReport compileJasperReport(String designName)
+    {
+        try
+        {
+            return JasperCompileManager.compileReport(loadJasperDesign(designName));
+        }
+        catch (JRException e)
+        {
+            throw new IllegalStateException(e);
+        }
     }
 
 
-    @RequestMapping(value = "/jasper", method = POST)
+    @RequestMapping(value = "/reports", method = POST)
     public void handleJasperExport(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception
     {
         long start = System.currentTimeMillis();
 
-        JasperDesign jasperDesign = JRXmlLoader.load(resource.getInputStream());
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        JasperReport jasperReport = compileJasperReport("JasperDesign.jrxml");
 
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("ReportTitle", "Customer Report");
+        parameters.put("ReportTitle", "Pohjoisen kesän yöttömät yöt,");
         parameters.put("Logo", "http://jasperreports.sourceforge.net/jasperreports.png");
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(getCustomers()));
+        JRExporter exporter;
+        if (outputType == OutputType.xls)
+        {
+            exporter = new JRXlsExporter();
+            response.setContentType("application/xls");
+            response.setHeader("Content-Disposition", "attachment; filename=jasper.xls");
+            exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
+        }
+        else
+        {
+            exporter = new JRPdfExporter();
+            response.setContentType("application/pdf");
+            //response.setHeader("Content-Disposition", "attachment; filename=example.pdf");
+        }
+        response.setCharacterEncoding("UTF-8");
+        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
+        exporter.exportReport();
+        System.err.println("Filling time : " + (System.currentTimeMillis() - start));
+    }
+
+    @RequestMapping(value = "/reports/unicode", method = GET)
+    public void handleJasperExportUnicode(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception
+    {
+        long start = System.currentTimeMillis();
+
+        JasperReport jasperReport = compileJasperReport("UnicodeReport.jrxml");
+
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        //parameters.put("ReportTitle", "Customer Report");
+        ///parameters.put("Logo", "http://jasperreports.sourceforge.net/jasperreports.png");
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(getCustomers()));
         JRExporter exporter;
