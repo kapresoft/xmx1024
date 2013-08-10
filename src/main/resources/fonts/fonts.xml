@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fontFamilies>
+
+    <fontFamily name="Arial">
+        <normal>fonts/arialuni.ttf</normal>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+        <exportFonts>
+            <export key="net.sf.jasperreports.pdf">Arial, SansSerif</export>
+        </exportFonts>
+    </fontFamily>
+
+</fontFamilies>

@@ -36,11 +36,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-public class JasperReportController
-{
+public class JasperReportController {
 
-    enum OutputType
-    {
+    enum OutputType {
         pdf, xls
     }
 
@@ -48,13 +46,11 @@ public class JasperReportController
     //private Resource resource;
 
     @RequestMapping(value = "/reports", method = GET)
-    public String handleJasper()
-    {
+    public String handleJasper() {
         return "reports";
     }
 
-    private JasperDesign loadJasperDesign(String designName)
-    {
+    private JasperDesign loadJasperDesign(String designName) {
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/jasper-designs/" + designName)
                 .build()
@@ -62,58 +58,46 @@ public class JasperReportController
         InputStream inputStream = null;
         JasperDesign jasperDesign = null;
         Resource resource = null;
-        try
-        {
+        try {
             resource = new UrlResource(uri);
             inputStream = resource.getInputStream();
             jasperDesign = JRXmlLoader.load(resource.getInputStream());
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             IOUtils.closeQuietly(inputStream);
-        }
-        catch (JRException e)
-        {
+        } catch (JRException e) {
             throw new IllegalStateException(e);
         }
         return jasperDesign;
     }
 
-    private JasperReport compileJasperReport(String designName)
-    {
-        try
-        {
+    private JasperReport compileJasperReport(String designName) {
+        try {
             return JasperCompileManager.compileReport(loadJasperDesign(designName));
-        }
-        catch (JRException e)
-        {
+        } catch (JRException e) {
             throw new IllegalStateException(e);
         }
     }
 
 
     @RequestMapping(value = "/reports", method = POST)
-    public void handleJasperExport(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    public void handleJasperExport(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception {
         long start = System.currentTimeMillis();
 
         JasperReport jasperReport = compileJasperReport("JasperDesign.jrxml");
 
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("ReportTitle", "Pohjoisen kesän yöttömät yöt,");
+//        parameters.put("ReportTitle", "Pohjoisen kesän yöttömät yöt,");
+        parameters.put("ReportTitle", "敏捷的棕色狐狸跃过那只懒狗。");
         parameters.put("Logo", "http://jasperreports.sourceforge.net/jasperreports.png");
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(getCustomers()));
         JRExporter exporter;
-        if (outputType == OutputType.xls)
-        {
+        if (outputType == OutputType.xls) {
             exporter = new JRXlsExporter();
             response.setContentType("application/xls");
             response.setHeader("Content-Disposition", "attachment; filename=jasper.xls");
             exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-        }
-        else
-        {
+        } else {
             exporter = new JRPdfExporter();
             response.setContentType("application/pdf");
             //response.setHeader("Content-Disposition", "attachment; filename=example.pdf");
@@ -126,27 +110,23 @@ public class JasperReportController
     }
 
     @RequestMapping(value = "/reports/unicode", method = GET)
-    public void handleJasperExportUnicode(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
+    public void handleJasperExportUnicode(@RequestParam(value = "type", defaultValue = "pdf") OutputType outputType, HttpServletRequest request, HttpServletResponse response) throws Exception {
         long start = System.currentTimeMillis();
 
         JasperReport jasperReport = compileJasperReport("UnicodeReport.jrxml");
 
         Map<String, Object> parameters = new HashMap<String, Object>();
-        //parameters.put("ReportTitle", "Customer Report");
+        parameters.put("ChineseText", "敏捷的棕色狐狸跃过那只懒狗。");
         ///parameters.put("Logo", "http://jasperreports.sourceforge.net/jasperreports.png");
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(getCustomers()));
         JRExporter exporter;
-        if (outputType == OutputType.xls)
-        {
+        if (outputType == OutputType.xls) {
             exporter = new JRXlsExporter();
             response.setContentType("application/xls");
             response.setHeader("Content-Disposition", "attachment; filename=jasper.xls");
             exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-        }
-        else
-        {
+        } else {
             exporter = new JRPdfExporter();
             response.setContentType("application/pdf");
             //response.setHeader("Content-Disposition", "attachment; filename=example.pdf");
@@ -158,17 +138,15 @@ public class JasperReportController
         System.err.println("Filling time : " + (System.currentTimeMillis() - start));
     }
 
-    private List<Customer> getCustomers()
-    {
+    private List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<Customer>();
         Customer c;
         Random random = new Random(1000);
         LoremIpsum loremIpsum = new LoremIpsum();
-        for (int i = 1; i < 100; i++)
-        {
+        for (int i = 1; i < 100; i++) {
             c = new Customer(Long.valueOf(i));
-            c.setFirstName("John");
-            c.setLastName("Doe");
+            c.setFirstName("John约翰");
+            c.setLastName("Doe李四");
             c.setBalance(random.nextDouble());
             c.setPhone("425-555-1212");
             c.setNotes(loremIpsum.getWords(10, random.nextInt(10)));
