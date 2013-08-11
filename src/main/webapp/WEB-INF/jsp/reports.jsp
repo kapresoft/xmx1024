@@ -20,7 +20,7 @@
     <b>Jasper Reports Library Examples</b>
 </p>
 
-<form:form method="post" target="_blank">
+<form:form method="get" action="${ctx}/reports/view" target="_blank">
     <input id="type" name="type" type="hidden"/>
 
     <button type="submit" data-output-type="pdf" class="locale-button btn btn-primary wide">PDF</button>
