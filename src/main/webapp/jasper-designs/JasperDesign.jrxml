@@ -6,12 +6,12 @@
               leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30"
               uuid="98ddb265-196f-4e42-ac80-d0a78f16a57a">
     <property name="ireport.zoom" value="3.0"/>
-    <property name="ireport.x" value="589"/>
+    <property name="ireport.x" value="232"/>
     <property name="ireport.y" value="0"/>
-    <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="8" isBold="false" isItalic="false"
-           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="false"/>
-    <style name="Arial_Bold" fontName="Arial" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
-           isStrikeThrough="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="false"/>
+    <style name="Arial_Normal" isDefault="true" fontName="Arial Unicode MS" fontSize="8" isBold="false" isItalic="false"
+           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+    <style name="Arial_Bold" fontName="Arial Unicode MS" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
     <parameter name="ReportTitle" class="java.lang.String"/>
     <parameter name="Logo" class="java.lang.String"/>
     <parameter name="dateFormat" class="java.text.DateFormat"/>
@@ -57,7 +57,7 @@
             <textField isBlankWhenNull="true">
                 <reportElement uuid="b8aa805b-6f6c-4892-b867-51b68278445d" x="377" y="0" width="375" height="35"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font fontName="Arial" size="22"/>
+                    <font size="22"/>
                 </textElement>
                 <textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
             </textField>
@@ -67,10 +67,10 @@
                 <textFieldExpression><![CDATA[$P{REPORT_LOCALE}]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement uuid="48ab720c-01bc-4c4e-a45d-d114684eba4e" style="Arial_Bold" mode="Opaque" x="685"
-                               y="51" width="30" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[Locale: ]]></text>
+                <reportElement uuid="48ab720c-01bc-4c4e-a45d-d114684eba4e" style="Arial_Bold" mode="Opaque" x="662"
+                               y="51" width="50" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[Locale:]]></text>
             </staticText>
         </band>
     </title>
@@ -87,31 +87,31 @@
             </staticText>
             <staticText>
                 <reportElement uuid="01b8a44c-247b-4f1f-abfa-0d12fe01a122" style="Arial_Bold" mode="Opaque" x="100"
-                               y="0" width="135" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                               y="0" width="125" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
                 <text><![CDATA[First Name]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="aec39fb9-a51c-4cb9-b663-31fb1c44f17f" style="Arial_Bold" mode="Opaque" x="235"
-                               y="0" width="142" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="aec39fb9-a51c-4cb9-b663-31fb1c44f17f" style="Arial_Bold" mode="Opaque" x="227"
+                               y="0" width="125" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
                 <text><![CDATA[Last Name 懒狗]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="45bd9941-470a-4a28-af96-ab3591f86d66" style="Arial_Bold" mode="Opaque" x="377"
+                <reportElement uuid="45bd9941-470a-4a28-af96-ab3591f86d66" style="Arial_Bold" mode="Opaque" x="354"
                                y="0" width="73" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <text><![CDATA[Balance]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="f43a69b5-f0cc-4b74-b25d-a5bea51402f0" style="Arial_Bold" mode="Opaque" x="524"
+                <reportElement uuid="f43a69b5-f0cc-4b74-b25d-a5bea51402f0" style="Arial_Bold" mode="Opaque" x="501"
                                y="0" width="83" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
                 <text><![CDATA[Phone]]></text>
             </staticText>
             <staticText>
-                <reportElement uuid="6a03f3a4-bbde-47e1-a64d-62065d328df5" style="Arial_Bold" mode="Opaque" x="612"
-                               y="0" width="130" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <reportElement uuid="6a03f3a4-bbde-47e1-a64d-62065d328df5" style="Arial_Bold" mode="Opaque" x="586"
+                               y="0" width="164" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
                 <text><![CDATA[Notes]]></text>
             </staticText>
@@ -123,7 +123,7 @@
                 </graphicElement>
             </line>
             <staticText>
-                <reportElement uuid="b0b2a82f-04a6-4e5a-ae1e-8a1ebb8c7726" style="Arial_Bold" mode="Opaque" x="456"
+                <reportElement uuid="b0b2a82f-04a6-4e5a-ae1e-8a1ebb8c7726" style="Arial_Bold" mode="Opaque" x="433"
                                y="0" width="60" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <text><![CDATA[Date]]></text>
@@ -145,40 +145,34 @@
                 <textFieldExpression><![CDATA[$F{CUSTOMER_ID}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true" isBlankWhenNull="true">
-                <reportElement uuid="f170fd07-624f-424d-b56a-bdf26c8cc371" x="100" y="1" width="135" height="15"/>
-                <textElement verticalAlignment="Middle">
-                    <font fontName="Arial" isStrikeThrough="false"/>
-                </textElement>
+                <reportElement uuid="f170fd07-624f-424d-b56a-bdf26c8cc371" x="100" y="1" width="125" height="15"/>
+                <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{FIRST_NAME}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="3b4d016f-ed8e-4389-80a7-32dc0c0dbfaf" x="235" y="1" width="142" height="15"/>
+                <reportElement uuid="3b4d016f-ed8e-4389-80a7-32dc0c0dbfaf" x="227" y="1" width="125" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{LAST_NAME}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
-                <reportElement uuid="cf9cf53c-3616-4301-80c1-b21a3050aea2" stretchType="RelativeToBandHeight" x="612"
-                               y="1" width="130" height="15"/>
+                <reportElement uuid="cf9cf53c-3616-4301-80c1-b21a3050aea2" stretchType="RelativeToBandHeight" x="586"
+                               y="1" width="164" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{NOTES}]]></textFieldExpression>
             </textField>
-            <textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
-                <reportElement uuid="17993c1c-d071-46da-b810-63509302a60b" x="377" y="1" width="73" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font fontName="Arial Unicode MS" isPdfEmbedded="false"/>
-                </textElement>
-                <textFieldExpression><![CDATA[$F{BALANCE}]]></textFieldExpression>
+            <textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+                <reportElement uuid="17993c1c-d071-46da-b810-63509302a60b" x="354" y="1" width="73" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$P{currencyFormat}.format($F{BALANCE})]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement uuid="0e3e53b3-5216-4856-8818-a67d4656a57e" x="524" y="1" width="83" height="15"/>
+                <reportElement uuid="0e3e53b3-5216-4856-8818-a67d4656a57e" x="501" y="1" width="83" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{PHONE}]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-                <reportElement uuid="96c66020-91d5-4efc-9373-befb8488715c" x="456" y="1" width="60" height="15"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font fontName="Arial Unicode MS" isPdfEmbedded="false"/>
-                </textElement>
+                <reportElement uuid="96c66020-91d5-4efc-9373-befb8488715c" x="433" y="1" width="60" height="15"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$P{dateFormat}.format($F{DATE})]]></textFieldExpression>
             </textField>
         </band>

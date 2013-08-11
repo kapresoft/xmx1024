@@ -2,12 +2,13 @@
 
 <fontFamilies>
 
-    <fontFamily name="Arial">
+    <fontFamily name="Arial Unicode MS">
         <normal>fonts/arialuni.ttf</normal>
         <pdfEncoding>Identity-H</pdfEncoding>
         <pdfEmbedded>true</pdfEmbedded>
         <exportFonts>
-            <export key="net.sf.jasperreports.pdf">Arial, SansSerif</export>
+            <export key="net.sf.jasperreports.pdf">Arial Unicode MS</export>
+            <export key="net.sf.jasperreports.xls">Arial Unicode MS</export>
         </exportFonts>
     </fontFamily>
 

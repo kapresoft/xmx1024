@@ -26,7 +26,8 @@
     <button data-locale="en_IE" class="locale-button btn wide">Ireland</button>
     <button data-locale="it_IT" class="locale-button btn wide">Italy</button>
     <button data-locale="sv_SE" class="locale-button btn wide">Sweden</button>
-    <button data-locale="en_GB" class="locale-button btn wide" style="margin-right: 10px;">Great Britain</button>
+    <button data-locale="hi_IN" class="locale-button btn wide">India</button>
+    <button data-locale="en_GB" class="locale-button btn wide" style="margin-right: 10px;">U.K.</button>
     <div class="btn-group">
         <button class="btn dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>

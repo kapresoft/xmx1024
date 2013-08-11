@@ -21,6 +21,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -30,8 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -97,23 +100,18 @@ public class JasperReportController {
         Map<String, Object> parameters = new HashMap<String, Object>();
 
         Locale locale = LocaleContextHolder.getLocale();
-        parameters.put(JRParameter.REPORT_LOCALE, locale);
         if (!hasText(locale.getCountry())) {
             locale = Locale.US;
         }
+        parameters.put(JRParameter.REPORT_LOCALE, locale);
 
-        // DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format($F{DATE})
-        // new SimpleDateFormat("MM/dd/yy").format($F{DATE})
-        //Currency currency = Currency.getInstance(locale);
+        Currency currency = Currency.getInstance(locale);
         //String currencyCode = currency.getCurrencyCode();
-        //String currencySymbol = currency.getSymbol(locale);
-        //System.out.printf("Locale:[%s] Currency code:[%s] symbol[%s]",
-        //        locale, currencyCode, currencySymbol);
-        //NumberFormat currencyFormat = NumberFormat.getInstance(locale);
-        //NumberFormat currencyFormat = new DecimalFormat("#,##0.00");
-        //currencyFormat.setCurrency(currency);
-        //parameters.put("currencyFormat", currencyFormat);
-        //parameters.put("currencySymbol", currencySymbol);
+        String currencySymbol = currency.getSymbol(locale);
+        parameters.put("currencySymbol", currencySymbol);
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        parameters.put("currencyFormat", currencyFormat);
 
         parameters.put("dateFormat", transformShortDatePattern(locale));
 
@@ -137,7 +135,7 @@ public class JasperReportController {
         exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
         exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
         exporter.exportReport();
-        System.err.println("Filling time : " + (System.currentTimeMillis() - start));
+        System.err.printf("Generated in: %s ms%n", System.currentTimeMillis() - start);
     }
 
     /**
@@ -202,7 +200,7 @@ public class JasperReportController {
                     .toDate();
             c.setDate(date);
             c.setPhone("425-555-1212");
-            c.setNotes(loremIpsum.getWords(10, random.nextInt(10)));
+            c.setNotes(StringUtils.capitalize(loremIpsum.getWords(4 + random.nextInt(10), random.nextInt(10))));
             customers.add(c);
         }
 
