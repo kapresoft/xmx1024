@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="ctx" value="<%= request.getContextPath() %>"/>
 
 <!DOCTYPE html>
@@ -110,22 +111,18 @@
         var homeMenuEl = $('#homeMenu');
         var activeMenuEl = $('meta[name=activeMenu]');
         var menuFound = false;
-        if (activeMenuEl.length > 0)
-        {
+        if (activeMenuEl.length > 0) {
             var activeMenu = activeMenuEl.attr('content');
             var activeMenuEl = $('#' + activeMenu);
-            if (activeMenuEl.length == 1)
-            {
+            if (activeMenuEl.length == 1) {
                 activeMenuEl.addClass('active');
                 menuFound = true;
             }
         }
 
-        if (menuFound)
-        {
+        if (menuFound) {
             homeMenuEl.removeClass('active');
-        } else
-        {
+        } else {
             homeMenuEl.addClass('active');
         }
     });

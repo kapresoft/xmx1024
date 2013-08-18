@@ -5,14 +5,12 @@
               name="FirstJasper" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752"
               leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30"
               uuid="98ddb265-196f-4e42-ac80-d0a78f16a57a">
-    <property name="ireport.zoom" value="3.0"/>
-    <property name="ireport.x" value="232"/>
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
     <property name="ireport.y" value="0"/>
-    <style name="Arial_Normal" isDefault="true" fontName="Arial Unicode MS" fontSize="8" isBold="false" isItalic="false"
-           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
-    <style name="Arial_Bold" fontName="Arial Unicode MS" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
-           isStrikeThrough="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
-    <parameter name="ReportTitle" class="java.lang.String"/>
+    <template><![CDATA[$P{BaseTemplateLocation} + "/JasperStyles.jrtx"]]></template>
+    <parameter name="BaseTemplateLocation" class="java.lang.String"/>
+    <parameter name="StyleTemplateURL" class="java.net.URL"/>
     <parameter name="Logo" class="java.lang.String"/>
     <parameter name="dateFormat" class="java.text.DateFormat"/>
     <parameter name="currencyFormat" class="java.text.NumberFormat"/>
@@ -55,11 +53,12 @@
                 <text><![CDATA[(c)2001-2006 by Tyrion Lannister]]></text>
             </staticText>
             <textField isBlankWhenNull="true">
-                <reportElement uuid="b8aa805b-6f6c-4892-b867-51b68278445d" x="377" y="0" width="375" height="35"/>
+                <reportElement uuid="b8aa805b-6f6c-4892-b867-51b68278445d" style="Arial_Bold" x="377" y="0" width="375"
+                               height="35"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle">
-                    <font size="22"/>
+                    <font size="20" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$R{reportTitle}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement uuid="18ef7528-4188-4096-802a-d319a918bb4c" x="715" y="51" width="37" height="12"/>
@@ -79,42 +78,50 @@
     </pageHeader>
     <columnHeader>
         <band height="20" splitType="Stretch">
-            <staticText>
-                <reportElement uuid="b41392fa-a5c9-4130-a3be-620c0d9677bf" style="Arial_Bold" mode="Opaque" x="0" y="0"
-                               width="100" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
-                <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[Customer ID]]></text>
-            </staticText>
-            <staticText>
+            <textField>
+                <reportElement uuid="b41392fa-a5c9-4130-a3be-620c0d9677bf" style="Arial_Normal" mode="Opaque" x="0"
+                               y="0" width="100" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$R{customerId}]]></textFieldExpression>
+            </textField>
+            <textField>
                 <reportElement uuid="01b8a44c-247b-4f1f-abfa-0d12fe01a122" style="Arial_Bold" mode="Opaque" x="100"
                                y="0" width="125" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[First Name]]></text>
-            </staticText>
-            <staticText>
+                <textFieldExpression><![CDATA[$R{firstName}]]></textFieldExpression>
+            </textField>
+            <textField>
                 <reportElement uuid="aec39fb9-a51c-4cb9-b663-31fb1c44f17f" style="Arial_Bold" mode="Opaque" x="227"
                                y="0" width="125" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[Last Name 懒狗]]></text>
-            </staticText>
-            <staticText>
+                <textFieldExpression><![CDATA[$R{lastName}]]></textFieldExpression>
+            </textField>
+            <textField>
                 <reportElement uuid="45bd9941-470a-4a28-af96-ab3591f86d66" style="Arial_Bold" mode="Opaque" x="354"
                                y="0" width="73" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <text><![CDATA[Balance]]></text>
-            </staticText>
-            <staticText>
+                <textFieldExpression><![CDATA[$R{balance}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="b0b2a82f-04a6-4e5a-ae1e-8a1ebb8c7726" style="Arial_Bold" mode="Opaque" x="433"
+                               y="0" width="60" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$R{date}]]></textFieldExpression>
+            </textField>
+            <textField>
                 <reportElement uuid="f43a69b5-f0cc-4b74-b25d-a5bea51402f0" style="Arial_Bold" mode="Opaque" x="501"
                                y="0" width="83" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[Phone]]></text>
-            </staticText>
-            <staticText>
+                <textFieldExpression><![CDATA[$R{phone}]]></textFieldExpression>
+            </textField>
+            <textField>
                 <reportElement uuid="6a03f3a4-bbde-47e1-a64d-62065d328df5" style="Arial_Bold" mode="Opaque" x="586"
                                y="0" width="164" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
                 <textElement textAlignment="Left" verticalAlignment="Middle"/>
-                <text><![CDATA[Notes]]></text>
-            </staticText>
+                <textFieldExpression><![CDATA[$R{notes}]]></textFieldExpression>
+            </textField>
             <line>
                 <reportElement uuid="e90fff54-2ebc-4c50-b4af-8adf383e9801" x="0" y="14" width="752" height="1"
                                forecolor="#0000FF"/>
@@ -122,12 +129,6 @@
                     <pen lineWidth="0.5" lineColor="#0000FF"/>
                 </graphicElement>
             </line>
-            <staticText>
-                <reportElement uuid="b0b2a82f-04a6-4e5a-ae1e-8a1ebb8c7726" style="Arial_Bold" mode="Opaque" x="433"
-                               y="0" width="60" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <text><![CDATA[Date]]></text>
-            </staticText>
         </band>
     </columnHeader>
     <detail>
@@ -160,20 +161,20 @@
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{NOTES}]]></textFieldExpression>
             </textField>
-            <textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+            <textField isStretchWithOverflow="true" pattern="managed" isBlankWhenNull="true">
                 <reportElement uuid="17993c1c-d071-46da-b810-63509302a60b" x="354" y="1" width="73" height="15"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$P{currencyFormat}.format($F{BALANCE})]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{BALANCE}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement uuid="0e3e53b3-5216-4856-8818-a67d4656a57e" x="501" y="1" width="83" height="15"/>
                 <textElement verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{PHONE}]]></textFieldExpression>
             </textField>
-            <textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
                 <reportElement uuid="96c66020-91d5-4efc-9373-befb8488715c" x="433" y="1" width="60" height="15"/>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$P{dateFormat}.format($F{DATE})]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{DATE}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

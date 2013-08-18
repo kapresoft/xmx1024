@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD
+Template//EN"
+        "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+<jasperTemplate>
+    <!-- include another styles template file -->
+    <!--<template><![CDATA[JasperStyles.jrtx]]></template>-->
+
+    <style name="Arial_Normal" isDefault="true" fontName="Arial Unicode MS" fontSize="8" isBold="false" isItalic="false"
+           isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+    <style name="Arial_Bold" fontName="Arial Unicode MS" fontSize="8" isBold="true" isItalic="false" isUnderline="false"
+           isStrikeThrough="false" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+</jasperTemplate>

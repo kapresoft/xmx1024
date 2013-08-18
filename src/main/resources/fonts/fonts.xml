@@ -4,6 +4,7 @@
 
     <fontFamily name="Arial Unicode MS">
         <normal>fonts/arialuni.ttf</normal>
+        <bold>fonts/arialuni.ttf</bold>
         <pdfEncoding>Identity-H</pdfEncoding>
         <pdfEmbedded>true</pdfEmbedded>
         <exportFonts>
