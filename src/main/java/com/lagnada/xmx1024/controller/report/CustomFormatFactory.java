@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import net.sf.jasperreports.engine.util.DefaultFormatFactory;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
@@ -83,6 +84,11 @@ public class CustomFormatFactory extends DefaultFormatFactory {
      * Currency Symbol seems to be locale specific, i.e. EUR for Locale.US, but EURO_SYMBOL European locales.
      */
     private String getCurrencyPattern(Currency currency, Locale currencyLocale) {
+        // Example on how to extract pattern
+        DecimalFormat format = (DecimalFormat) NumberFormat.getInstance(currencyLocale);
+        String pattern = format.toPattern();
+        System.out.println(pattern);
+
         String currencyPattern = "¤ #,##0.00";
         String currencySymbol = currency.getSymbol(currencyLocale);
         if (CURRENCY_OVERRIDES.containsKey(currencySymbol)) {
