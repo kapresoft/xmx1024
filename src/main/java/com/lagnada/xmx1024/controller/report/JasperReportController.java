@@ -40,7 +40,7 @@ public class JasperReportController {
                 .designName("JasperDesign.jrxml")
                 .outputType(outputType)
                 .response(response)
-                .formatFactory(new CustomFormatFactory())
+                .formatFactory(CustomFormatFactory.fromCurrencyCode("EUR"))
                 .build();
 
     }

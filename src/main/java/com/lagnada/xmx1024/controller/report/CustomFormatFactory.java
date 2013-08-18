@@ -1,18 +1,47 @@
 package com.lagnada.xmx1024.controller.report;
 
+import com.google.common.base.Optional;
 import net.sf.jasperreports.engine.util.DefaultFormatFactory;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import static org.springframework.util.StringUtils.countOccurrencesOf;
 
 public class CustomFormatFactory extends DefaultFormatFactory {
+
+    private final static Map<String, String> CURRENCY_OVERRIDES = new HashMap<String, String>();
+
+    {
+        CURRENCY_OVERRIDES.put("GBP", "£");
+        CURRENCY_OVERRIDES.put("EUR", "€");
+        CURRENCY_OVERRIDES.put("INR", "रू");
+        CURRENCY_OVERRIDES.put("SEK", "kr");
+        CURRENCY_OVERRIDES.put("CNY", "￥");
+        CURRENCY_OVERRIDES.put("RUB", "руб.");
+        CURRENCY_OVERRIDES.put("VND", "đ");
+        CURRENCY_OVERRIDES.put("KRW", "￦");
+        CURRENCY_OVERRIDES.put("UAH", "грн.");
+        CURRENCY_OVERRIDES.put("PLN", "zł");
+    }
+
+    private String currencyCode;
+
+    public static CustomFormatFactory fromCurrencyCode(String currencyCode) {
+        return new CustomFormatFactory(currencyCode);
+    }
+
+    private CustomFormatFactory(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
+
     @Override
     public DateFormat createDateFormat(String pattern, Locale locale, TimeZone tz) {
 
@@ -27,14 +56,43 @@ public class CustomFormatFactory extends DefaultFormatFactory {
     }
 
     @Override
-    public NumberFormat createNumberFormat(String pattern, Locale locale) {
+    public NumberFormat createNumberFormat(String pattern, Locale currencyLocale) {
         NumberFormat format;
         if ("managed".equalsIgnoreCase(pattern)) {
-            format = new DecimalFormat("'USD' ¤ #,##0.00");
+            Currency currency = null;
+            String currencyPattern = null;
+            try {
+                currency = Currency.getInstance(currencyCode);
+                currencyPattern = getCurrencyPattern(currency, currencyLocale);
+            } catch (Exception ignoredException) {
+                currencyPattern = createStaticCurrencyPattern(currencyCode, currencyPattern);
+            }
+
+            format = super.createNumberFormat(currencyPattern, currencyLocale);
+            if (Optional.fromNullable(currency).isPresent()) {
+                format.setCurrency(currency);
+            }
+
         } else {
-            format = super.createNumberFormat(pattern, locale);
+            format = super.createNumberFormat(pattern, currencyLocale);
         }
         return format;
+    }
+
+    /**
+     * Currency Symbol seems to be locale specific, i.e. EUR for Locale.US, but EURO_SYMBOL European locales.
+     */
+    private String getCurrencyPattern(Currency currency, Locale currencyLocale) {
+        String currencyPattern = "¤ #,##0.00";
+        String currencySymbol = currency.getSymbol(currencyLocale);
+        if (CURRENCY_OVERRIDES.containsKey(currencySymbol)) {
+            currencyPattern = createStaticCurrencyPattern(CURRENCY_OVERRIDES.get(currencySymbol), currencyPattern);
+        }
+        return currencyPattern;
+    }
+
+    private String createStaticCurrencyPattern(String currencyCode, String currencyPattern) {
+        return currencyPattern.replace("¤", String.format("'%s'", currencyCode));
     }
 
     /**

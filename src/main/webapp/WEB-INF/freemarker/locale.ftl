@@ -34,7 +34,7 @@
         </button>
         <ul class="dropdown-menu">
             <li><a data-locale="zh_CN" class="locale-button" href="#">China</a></li>
-            <li><a data-locale="ko_KO" class="locale-button" href="#">Korea</a></li>
+            <li><a data-locale="ko_KR" class="locale-button" href="#">Korea</a></li>
             <li><a data-locale="ru_RU" class="locale-button" href="#">Russia</a></li>
             <li><a data-locale="vi_VN" class="locale-button" href="#">Vietnam</a></li>
         </ul>
