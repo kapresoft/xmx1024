@@ -32,7 +32,7 @@
 
     <script type="text/javascript">
         less = {
-            env: "production", // development or production
+            env: "development", // development or production
             async: false,       // load imports async
             fileAsync: false,   // load imports async when in a page under a file protocol
             poll: 1000,         // when in watch mode, time in ms between polls
@@ -64,6 +64,7 @@
                     <ul class="nav">
                         <li id="homeMenu"><a href="${ctx}/home"><i class="icon-bookmark"></i> Home</a></li>
                         <li id="reportsMenu"><a href="${ctx}/reports"> Jasper Reports</a></li>
+                        <li id="w8Menu"><a href="${ctx}/w8"> W8</a></li>
                         <li id="localeMenu" class="font-effect-embos"><a href="${ctx}/locale">Locale</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
@@ -111,18 +112,22 @@
         var homeMenuEl = $('#homeMenu');
         var activeMenuEl = $('meta[name=activeMenu]');
         var menuFound = false;
-        if (activeMenuEl.length > 0) {
+        if (activeMenuEl.length > 0)
+        {
             var activeMenu = activeMenuEl.attr('content');
             var activeMenuEl = $('#' + activeMenu);
-            if (activeMenuEl.length == 1) {
+            if (activeMenuEl.length == 1)
+            {
                 activeMenuEl.addClass('active');
                 menuFound = true;
             }
         }
 
-        if (menuFound) {
+        if (menuFound)
+        {
             homeMenuEl.removeClass('active');
-        } else {
+        } else
+        {
             homeMenuEl.addClass('active');
         }
     });
