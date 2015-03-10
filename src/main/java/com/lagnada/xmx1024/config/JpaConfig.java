@@ -2,28 +2,38 @@ package com.lagnada.xmx1024.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Profile("embedded")
 @Configuration
-@ImportResource("classpath:tx-config.xml")
+@EnableTransactionManagement(mode = AdviceMode.PROXY)
 public class JpaConfig {
 
     private static final String PERSISTENCE_UNIT_NAME = "jpa";
     private static final String PACKAGES_TO_SCAN = "com.lagnada.xmx1024";
+
+    @Bean(name = "transactionManager")
+    public JpaTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager txMgr = new JpaTransactionManager();
+        txMgr.setEntityManagerFactory(entityManagerFactory);
+        txMgr.afterPropertiesSet();
+        return txMgr;
+    }
 
     @Bean(name = "jpaAdapter")
     public HibernateJpaVendorAdapter hibernateJpaVendorAdapter(
@@ -70,7 +80,7 @@ public class JpaConfig {
 
     @Bean
     @Qualifier("jpaProperties")
-    private Properties jpaProperties(@Value("${hibernate.generate_statistics}") String generateStatistics,
+    public Properties jpaProperties(@Value("${hibernate.generate_statistics}") String generateStatistics,
                                      @Value("${hibernate.cache.use_structured_entries}") String structuredEntries,
                                      @Value("${hibernate.use_sql_comments}") String useSqlComments,
                                      @Value("${hibernate.jdbc.batch_size}") String batchSize) {
