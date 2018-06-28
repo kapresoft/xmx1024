@@ -1,10 +1,11 @@
 package com.lagnada.xmx1024.representation;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
-import org.codehaus.jackson.annotate.JsonTypeName;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.LocalDate;
@@ -20,11 +21,12 @@ import java.net.URI;
         "firstName", "lastName", "fullName", "birthdate", "prettyBirthdate",
         "deleted", "reference"
 })
-//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE)
 public class AccountRepresentation implements Serializable {
 
     private static final long serialVersionUID = -6214910323191581222L;
-    public static final String BIRTHDATE_FORMAT = "yyyy-MM-dd";
 
     @JsonProperty("reference")
     private URI reference;
@@ -38,6 +40,7 @@ public class AccountRepresentation implements Serializable {
 
     @JsonProperty("password")
     @Size(min = 7, max = 30)
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     private String password;
 
     @JsonProperty("firstName")
@@ -95,7 +98,6 @@ public class AccountRepresentation implements Serializable {
         this.email = email;
     }
 
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String getPassword() {
         return password;
     }
@@ -138,12 +140,6 @@ public class AccountRepresentation implements Serializable {
 
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public String getPrettyBirthdate() {
-        return birthdate != null ?
-                birthdate.toString(BIRTHDATE_FORMAT) :
-                null;
     }
 
 }

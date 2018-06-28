@@ -3,16 +3,11 @@ package com.lagnada.xmx1024.converter;
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
 import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountRepresentationToAccountConverter implements Converter<AccountRepresentation, Account> {
-
-    @Autowired
-    ConversionService conversionService;
 
     @Override
     public Account convert(AccountRepresentation representation) {

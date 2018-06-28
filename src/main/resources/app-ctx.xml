@@ -17,7 +17,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <cache:annotation-driven/>
 
-    <bean class="com.lagnada.xmx1024.config.AppContextConfig"/>
+    <!--<bean class="com.lagnada.xmx1024.config.AppContextConfig"/>-->
 
     <!--<context:property-placeholder location="classpath*:*.properties"/>-->
     <!--<context:property-placeholder location="classpath*:encryptor.properties"/>-->

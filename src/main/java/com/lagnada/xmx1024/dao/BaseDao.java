@@ -12,6 +12,15 @@ public abstract class BaseDao {
     @PersistenceContext
     protected EntityManager entityManager;
 
+    protected <C, A> CriteriaQuery<C> singleCriteria(Class<C> clazz, String field,
+                                                     A value, CriteriaBuilder criteriaBuilder) {
+        CriteriaQuery<C> criteriaQuery = criteriaBuilder.createQuery(clazz);
+        Root<C> from = criteriaQuery.from(clazz);
+        criteriaQuery.where(criteriaBuilder.equal(from.get(field), value));
+        return criteriaQuery;
+    }
+
+    @Deprecated
     protected <C, A> CriteriaQuery<C> singleCriteria(Class<C> clazz, SingularAttribute<C, A> entityField,
                                                      A value, CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<C> criteriaQuery = criteriaBuilder.createQuery(clazz);
@@ -20,6 +29,11 @@ public abstract class BaseDao {
         return criteriaQuery;
     }
 
+    protected <C, A> CriteriaQuery<C> singleCriteria(Class<C> clazz, String whereEntityField, A equalsValue) {
+        return singleCriteria(clazz, whereEntityField, equalsValue, entityManager.getCriteriaBuilder());
+    }
+
+    @Deprecated
     protected <C, A> CriteriaQuery<C> singleCriteria(Class<C> clazz, SingularAttribute<C, A> entityField, A value) {
         return singleCriteria(clazz, entityField, value, entityManager.getCriteriaBuilder());
     }

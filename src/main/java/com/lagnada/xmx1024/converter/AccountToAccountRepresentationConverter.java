@@ -1,9 +1,9 @@
 package com.lagnada.xmx1024.converter;
 
+import com.google.common.base.Optional;
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,14 +22,11 @@ public class AccountToAccountRepresentationConverter implements Converter<Accoun
         representation.setEmail(account.getEmail());
         representation.setFirstName(account.getFirstName());
         representation.setLastName(account.getLastName());
-        LocalDate birthdate = null;
-        if (account.getBirthdate() != null) {
-            birthdate = LocalDate.fromDateFields(account.getBirthdate());
-        }
 
-        Date birthdayAgain = LocalDate.parse("1987-04-08", DateTimeFormat.forPattern("yyyy-MM-dd")).toDate();
-        System.out.println(birthdayAgain);
-        representation.setBirthdate(birthdate);
+        Optional<Date> optionalBirthdate = Optional.fromNullable(account.getBirthdate());
+        if (optionalBirthdate.isPresent()) {
+            representation.setBirthdate(LocalDate.fromDateFields(optionalBirthdate.get()));
+        }
         representation.setPassword(null);
         representation.setDeleted(account.getDeleted() != null ? account.getDeleted() : Boolean.FALSE);
         // skip deletedByField
