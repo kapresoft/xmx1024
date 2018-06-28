@@ -1,7 +1,6 @@
 package com.lagnada.xmx1024.servlet;
 
 import com.lagnada.xmx1024.config.ApplicationContextConfig;
-import com.lagnada.xmx1024.config.ServletContextConfig;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -12,9 +11,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
-                InternationalizationInitializer.class,
-                ConversionServiceInitializer.class,
-                ValidatorInitializer.class,
                 ApplicationContextConfig.class
         };
     }
@@ -22,7 +18,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
-                JspInitializer.class,
                 ServletContextConfig.class
         };
     }

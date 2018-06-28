@@ -9,13 +9,13 @@
     <version>1.0.0-BUILD-SNAPSHOT</version>
 
     <properties>
-        <java-version>1.7</java-version>
+        <java-version>1.8</java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven-compiler-plugin-version>3.2</maven-compiler-plugin-version>
+        <maven-compiler-plugin-version>3.7.0</maven-compiler-plugin-version>
         <maven-jetty-plugin-version>6.1.26</maven-jetty-plugin-version>
-        <maven-processor-plugin-version>2.0.0</maven-processor-plugin-version>
-        <maven-war-plugin-version>2.2</maven-war-plugin-version>
+        <maven-processor-plugin-version>3.3.3</maven-processor-plugin-version>
+        <maven-war-plugin-version>3.1.0</maven-war-plugin-version>
 
         <aspectj-version>1.6.9</aspectj-version>
         <cglib-version>2.2.2</cglib-version>
@@ -290,6 +290,13 @@
             <version>${fest-assert.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
         <!-- ==============================================================================================  -->
         <!-- Runtime only dependencies (runtime scoped)                                                      -->
@@ -339,9 +346,6 @@
     <build>
         <finalName>xmx1024</finalName>
 
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-
         <resources>
             <resource>
                 <filtering>true</filtering>
@@ -350,7 +354,7 @@
 
             <resource>
                 <filtering>false</filtering>
-                <directory>${build.sourceDirectory}</directory>
+                <directory>${project.build.sourceDirectory}</directory>
                 <includes>
                     <include>**</include>
                 </includes>
@@ -367,7 +371,7 @@
             </testResource>
             <testResource>
                 <filtering>false</filtering>
-                <directory>${build.testSourceDirectory}</directory>
+                <directory>${project.build.testSourceDirectory}</directory>
                 <includes>
                     <include>**</include>
                 </includes>
@@ -388,6 +392,11 @@
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>maven-jetty-plugin</artifactId>
+                    <version>${maven-jetty-plugin-version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -463,7 +472,6 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
                 <configuration>
                     <port>8080</port>
                     <path>/${project.build.finalName}</path>
@@ -474,7 +482,6 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>${maven-jetty-plugin-version}</version>
                 <configuration>
                     <contextPath>/${project.build.finalName}</contextPath>
                     <connectors>

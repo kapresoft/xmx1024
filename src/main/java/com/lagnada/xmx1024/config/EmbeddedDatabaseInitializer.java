@@ -10,11 +10,11 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @Profile("default")
 @Configuration
 @PropertySource("classpath:jpa-h2.properties")
-public class EmbeddedDatabaseConfig {
+public class EmbeddedDatabaseInitializer {
 
     @Bean(name = "dataSource")
     public EmbeddedDatabaseFactoryBean embeddedDatabaseFactoryBean() {
-        EmbeddedDatabaseFactoryBean factory = new EmbeddedDatabaseFactoryBean();
+        final EmbeddedDatabaseFactoryBean factory = new EmbeddedDatabaseFactoryBean();
         factory.setDatabaseType(EmbeddedDatabaseType.H2);
         factory.afterPropertiesSet();
         return factory;

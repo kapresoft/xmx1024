@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Service
-@Transactional(readOnly = false)
+@Transactional
 public class AccountServiceImpl implements AccountService {
 
     @Autowired

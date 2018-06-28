@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY)
-public class JpaConfig {
+public class JpaInitializer {
 
     private static final String PERSISTENCE_UNIT_NAME = "jpa";
     private static final String PACKAGES_TO_SCAN = "com.lagnada.xmx1024";
