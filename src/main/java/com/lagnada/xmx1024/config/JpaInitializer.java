@@ -1,11 +1,13 @@
 package com.lagnada.xmx1024.config;
 
+import com.lagnada.xmx1024.service.AccountRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,7 +24,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY)
-//@EnableJpaRepositories(basePackageClasses = AccountRepository.class)
+@EnableJpaRepositories(basePackageClasses = AccountRepository.class)
 public class JpaInitializer {
 
     private static final String PERSISTENCE_UNIT_NAME = "jpa";

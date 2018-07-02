@@ -2,11 +2,13 @@ package com.lagnada.xmx1024.controller;
 
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
+import com.lagnada.xmx1024.service.AccountRepository;
 import com.lagnada.xmx1024.service.AccountService;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,9 @@ import org.springframework.web.util.UriComponents;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
+import static java.util.Optional.ofNullable;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_ATOM_XML_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -35,19 +39,24 @@ public class AccountController {
 
     private final AccountService accountService;
     private final ConversionService conversionService;
+    private AccountRepository accountRepository;
 
     @Autowired
-    public AccountController(ConversionService conversionService, AccountService accountService)
+    public AccountController(ConversionService conversionService, AccountService accountService,
+                             AccountRepository accountRepository)
     {
         this.accountService = accountService;
         this.conversionService = conversionService;
+        this.accountRepository = accountRepository;
     }
 
     @RequestMapping(value = "/account/{accountId}", method = {GET, HEAD})
     public ResponseEntity<AccountRepresentation> getAccount(@PathVariable Long accountId) {
-        Account account = accountService.getAccountById(accountId);
+        //Account account = accountService.getAccountById(accountId);
+        Optional<Account> optionalAccount = ofNullable(accountRepository.findOne(accountId));
         //Optional<Account> optionalAccount = accountRepository.findById(accountId);
-        //Account account = optionalAccount.orElseThrow(() -> new EmptyResultDataAccessException("Account not found: " + accountId, 1));
+        Account account = optionalAccount.orElseThrow(() -> new EmptyResultDataAccessException("Account not found: " + accountId, 1));
+
         AccountRepresentation accountRepresentation = conversionService.convert(account, AccountRepresentation.class);
 
         HttpHeaders headers = new HttpHeaders();
