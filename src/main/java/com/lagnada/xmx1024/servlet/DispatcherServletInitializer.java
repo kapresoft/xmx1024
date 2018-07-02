@@ -2,10 +2,11 @@ package com.lagnada.xmx1024.servlet;
 
 import com.lagnada.xmx1024.config.ApplicationContextConfig;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+
+import static com.lagnada.xmx1024.servlet.CharacterEncodingFilterBuilder.newCharacterEncodingFilterBuilder;
 
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -30,16 +31,9 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Filter[] getServletFilters() {
         Filter[] filters = new Filter[2];
-        filters[0] = characterEncodingFilter();
+        filters[0] = newCharacterEncodingFilterBuilder().build();
         filters[1] = configurableSiteMeshFilter();
         return filters;
-    }
-
-    private Filter characterEncodingFilter() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
     }
 
     private ConfigurableSiteMeshFilter configurableSiteMeshFilter() {

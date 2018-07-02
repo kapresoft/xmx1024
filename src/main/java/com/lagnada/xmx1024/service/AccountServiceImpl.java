@@ -20,13 +20,13 @@ public class AccountServiceImpl implements AccountService {
     private AccountDao accountDao;
 
     @Override
-    @Transactional(readOnly = true)
     public Account getAccountById(Long accountId) {
         checkArgument(accountId != null, "AccountId arg was null");
         return accountDao.getAccountById(accountId);
     }
 
     @Override
+    @Transactional
     public void createAccount(final Account account) {
         checkArgument(account != null, "Account arg was null");
         checkExistingAccount(account.getUsername());

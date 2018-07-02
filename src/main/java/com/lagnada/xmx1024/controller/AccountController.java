@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
@@ -21,34 +20,42 @@ import java.util.Calendar;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_ATOM_XML_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 /**
  * Handles requests for the application home page.
  */
-@Controller
-@RequestMapping(value = "/api")
-public class AccountController extends BaseController {
+@RestController
+@RequestMapping(value = "/api", produces = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
+public class AccountController {
+
+    private final AccountService accountService;
+    private final ConversionService conversionService;
 
     @Autowired
-    private AccountService accountService;
-    @Autowired
-    private ConversionService conversionService;
+    public AccountController(ConversionService conversionService, AccountService accountService)
+    {
+        this.accountService = accountService;
+        this.conversionService = conversionService;
+    }
 
-    @RequestMapping(value = "/account/{accountId}", method = {GET, HEAD}, produces = {"application/json", "application/atom+xml"})
-    @ResponseBody
+    @RequestMapping(value = "/account/{accountId}", method = {GET, HEAD})
     public ResponseEntity<AccountRepresentation> getAccount(@PathVariable Long accountId) {
         Account account = accountService.getAccountById(accountId);
+        //Optional<Account> optionalAccount = accountRepository.findById(accountId);
+        //Account account = optionalAccount.orElseThrow(() -> new EmptyResultDataAccessException("Account not found: " + accountId, 1));
         AccountRepresentation accountRepresentation = conversionService.convert(account, AccountRepresentation.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-My-Header", "Value");
-        return new ResponseEntity<AccountRepresentation>(accountRepresentation, headers, OK);
+        return new ResponseEntity<>(accountRepresentation, headers, OK);
     }
 
-    @RequestMapping(value = "/accountFeed/{accountId}", method = {GET}, headers = "Accept=application/atom+xml", produces = "application/atom+xml")
-    @ResponseBody
+    @RequestMapping(value = "/accountFeed/{accountId}", method = {GET}, produces = APPLICATION_ATOM_XML_VALUE)
     public ResponseEntity<Feed> getAccountFeed(@PathVariable Long accountId) {
 
         AccountRepresentation accountRepresentation = new AccountRepresentation();
@@ -71,6 +78,5 @@ public class AccountController extends BaseController {
         feed.setEntries(entries);
         return new ResponseEntity<Feed>(feed, OK);
     }
-
 
 }

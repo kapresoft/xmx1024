@@ -22,6 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY)
+//@EnableJpaRepositories(basePackageClasses = AccountRepository.class)
 public class JpaInitializer {
 
     private static final String PERSISTENCE_UNIT_NAME = "jpa";

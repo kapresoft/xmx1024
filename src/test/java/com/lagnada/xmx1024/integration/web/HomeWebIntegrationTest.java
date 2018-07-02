@@ -1,4 +1,4 @@
-package com.lagnada.xmx1024.integration.controller;
+package com.lagnada.xmx1024.integration.web;
 
 import com.lagnada.xmx1024.integration.WebIntegrationTestCase;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class HomeWebIntegrationTest extends WebIntegrationTestCase {
     {
         mvc.perform(get("/home").accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML_VALUE + ";charset=ISO-8859-1"))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("home"));
 
     }
