@@ -3,9 +3,11 @@ package com.lagnada.xmx1024.integration;
 import com.lagnada.xmx1024.domain.Account;
 import com.lagnada.xmx1024.representation.AccountRepresentation;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-public class AccountRepresentationToAccountConverterTest extends IntegrationTestCase {
+@IntegrationTest
+@RunWith(SpringJUnit4ClassRunner.class)
+public class AccountRepresentationToAccountConverterTest {
 
     @Autowired
     ConversionService conversionService;
