@@ -3,6 +3,12 @@
 *.iml
 .springBeans
 
+.classpath
+.factorypath
+.project
+.settings/
+.vscode/
+
 # Package Files #
 *.jar
 *.war
